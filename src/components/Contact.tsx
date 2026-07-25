@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import RoboBuddy from "@/components/RoboBuddy";
+import { Meteors } from "@/components/ui/meteors";
 
 const LINKS = [
   {
@@ -66,9 +67,13 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative w-full bg-[#0a0a0a] px-6 py-24 text-center sm:py-32"
+      className="relative w-full overflow-hidden bg-[#0a0a0a] px-6 py-24 text-center sm:py-32"
     >
-      <div className="pointer-events-none absolute top-8 right-6 hidden sm:block md:right-12">
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <Meteors number={20} />
+      </div>
+
+      <div className="pointer-events-none absolute top-8 right-6 z-20 hidden sm:block md:right-12">
         <RoboBuddy />
       </div>
 
@@ -77,7 +82,7 @@ export default function Contact() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.3 }}
-        className="mx-auto flex max-w-2xl flex-col items-center gap-6"
+        className="relative z-10 mx-auto flex max-w-2xl flex-col items-center gap-6"
       >
         <motion.h2
           variants={item}
