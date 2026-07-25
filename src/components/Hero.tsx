@@ -51,7 +51,7 @@ export default function Hero() {
       >
         <motion.div
           variants={photoItem}
-          className="relative mb-6 h-[160px] w-[160px] rounded-full border border-blue-500/60 shadow-[0_0_12px_rgba(59,130,246,0.5)] sm:h-[180px] sm:w-[180px]"
+          className="relative mb-6 h-[160px] w-[160px] overflow-hidden rounded-full border border-blue-500/60 shadow-[0_0_12px_rgba(59,130,246,0.5)] sm:h-[180px] sm:w-[180px]"
         >
           <Image
             src="/profile.png"
@@ -59,7 +59,7 @@ export default function Hero() {
             fill
             priority
             sizes="180px"
-            className="rounded-full object-cover"
+            className="rounded-full object-cover object-[center_8%]"
           />
         </motion.div>
 

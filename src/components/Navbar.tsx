@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { getLenis } from "@/lib/lenis";
+import CommandPaletteTrigger from "@/components/CommandPaletteTrigger";
 
 const NAV_LINKS = [
   { label: "About", href: "#about" },
@@ -82,30 +83,34 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <button
-          type="button"
-          onClick={() => setMobileOpen((open) => !open)}
-          aria-label="Toggle navigation menu"
-          aria-expanded={mobileOpen}
-          className="relative flex h-8 w-8 flex-col items-center justify-center gap-1.5 lg:hidden"
-        >
-          <motion.span
-            animate={
-              mobileOpen
-                ? { rotate: 45, y: 3.5 }
-                : { rotate: 0, y: 0 }
-            }
-            className="h-px w-6 bg-zinc-200"
-          />
-          <motion.span
-            animate={
-              mobileOpen
-                ? { rotate: -45, y: -3.5 }
-                : { rotate: 0, y: 0 }
-            }
-            className="h-px w-6 bg-zinc-200"
-          />
-        </button>
+        <div className="flex items-center gap-2">
+          <CommandPaletteTrigger />
+
+          <button
+            type="button"
+            onClick={() => setMobileOpen((open) => !open)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={mobileOpen}
+            className="relative flex h-8 w-8 flex-col items-center justify-center gap-1.5 lg:hidden"
+          >
+            <motion.span
+              animate={
+                mobileOpen
+                  ? { rotate: 45, y: 3.5 }
+                  : { rotate: 0, y: 0 }
+              }
+              className="h-px w-6 bg-zinc-200"
+            />
+            <motion.span
+              animate={
+                mobileOpen
+                  ? { rotate: -45, y: -3.5 }
+                  : { rotate: 0, y: 0 }
+              }
+              className="h-px w-6 bg-zinc-200"
+            />
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>
