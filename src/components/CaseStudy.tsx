@@ -27,7 +27,7 @@ const item = {
 function Section({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <motion.div variants={item} className="border-t border-blue-500/20 pt-8">
-      <h2 className="text-xs font-medium tracking-wide text-blue-400 uppercase">
+      <h2 className="font-mono text-xs font-medium tracking-wide text-blue-400 uppercase">
         {label}
       </h2>
       <div className="mt-3 text-base leading-relaxed text-zinc-300">
@@ -63,14 +63,14 @@ export default function CaseStudy({ project }: { project: Project }) {
         </motion.div>
 
         <motion.div variants={item} className="flex flex-col gap-4">
-          <h1 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+          <h1 className="font-heading text-3xl font-semibold tracking-tight text-white sm:text-4xl">
             {project.title}
           </h1>
           <div className="flex flex-wrap gap-2">
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-full border border-blue-500/30 px-3 py-1 text-xs text-zinc-300"
+                className="rounded-full border border-blue-500/30 px-3 py-1 font-mono text-xs text-zinc-300"
               >
                 {tag}
               </span>
@@ -98,7 +98,7 @@ export default function CaseStudy({ project }: { project: Project }) {
               {project.kpis.map((kpi) => (
                 <span
                   key={kpi}
-                  className="rounded-full border border-blue-500/30 px-3 py-1 text-sm text-zinc-300"
+                  className="rounded-full border border-blue-500/30 px-3 py-1 font-mono text-sm text-zinc-300"
                 >
                   {kpi}
                 </span>
@@ -157,7 +157,7 @@ export default function CaseStudy({ project }: { project: Project }) {
             {toolsUsed.map((tool) => (
               <span
                 key={tool}
-                className="rounded-full border border-blue-500/30 px-3 py-1 text-sm text-zinc-300"
+                className="rounded-full border border-blue-500/30 px-3 py-1 font-mono text-sm text-zinc-300"
               >
                 {tool}
               </span>

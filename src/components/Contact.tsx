@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import RoboBuddy from "@/components/RoboBuddy";
 
 const LINKS = [
   {
@@ -65,8 +66,12 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="w-full bg-[#0a0a0a] px-6 py-24 text-center sm:py-32"
+      className="relative w-full bg-[#0a0a0a] px-6 py-24 text-center sm:py-32"
     >
+      <div className="pointer-events-none absolute top-8 right-6 hidden sm:block md:right-12">
+        <RoboBuddy />
+      </div>
+
       <motion.div
         variants={container}
         initial="hidden"
@@ -76,7 +81,7 @@ export default function Contact() {
       >
         <motion.h2
           variants={item}
-          className="text-3xl font-semibold tracking-tight text-white sm:text-4xl"
+          className="font-heading text-3xl font-semibold tracking-tight text-white sm:text-4xl"
         >
           Let&apos;s Connect
         </motion.h2>

@@ -58,7 +58,7 @@ export default function About() {
       >
         <motion.span
           variants={item}
-          className="text-sm font-medium tracking-widest text-blue-400 uppercase"
+          className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase"
         >
           About
         </motion.span>
@@ -76,7 +76,7 @@ export default function About() {
         >
           {FACTS.map((fact) => (
             <div key={fact.label}>
-              <dt className="text-xs font-medium tracking-wide text-blue-400 uppercase">
+              <dt className="font-mono text-xs font-medium tracking-wide text-blue-400 uppercase">
                 {fact.label}
               </dt>
               <dd className="mt-2 text-base text-zinc-100">{fact.value}</dd>
@@ -85,14 +85,14 @@ export default function About() {
         </motion.dl>
 
         <motion.div variants={item}>
-          <span className="text-xs font-medium tracking-wide text-blue-400 uppercase">
+          <span className="font-mono text-xs font-medium tracking-wide text-blue-400 uppercase">
             Stack
           </span>
           <div className="mt-3 flex flex-wrap gap-2">
             {STACK.map((tech) => (
               <span
                 key={tech}
-                className="rounded-full border border-blue-500/30 px-3 py-1 text-sm text-zinc-300"
+                className="rounded-full border border-blue-500/30 px-3 py-1 font-mono text-sm text-zinc-300"
               >
                 {tech}
               </span>

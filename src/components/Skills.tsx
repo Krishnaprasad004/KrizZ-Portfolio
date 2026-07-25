@@ -57,7 +57,7 @@ export default function Skills() {
       >
         <motion.span
           variants={item}
-          className="text-sm font-medium tracking-widest text-blue-400 uppercase"
+          className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase"
         >
           Skills
         </motion.span>
@@ -66,14 +66,14 @@ export default function Skills() {
           {SKILL_CATEGORIES.map((group) => (
             <motion.div key={group.category} variants={item} className="h-full">
               <div className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-colors duration-300 hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.25)]">
-                <h3 className="text-sm font-semibold text-white">
+                <h3 className="font-heading text-sm font-semibold tracking-tight text-white">
                   {group.category}
                 </h3>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {group.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="rounded-full border border-blue-500/30 px-3 py-1 text-xs text-zinc-300"
+                      className="rounded-full border border-blue-500/30 px-3 py-1 font-mono text-xs text-zinc-300"
                     >
                       {skill}
                     </span>

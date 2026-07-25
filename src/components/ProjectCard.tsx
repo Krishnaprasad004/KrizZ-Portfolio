@@ -50,7 +50,7 @@ export default function ProjectCard({ project }: { project: Project }) {
         />
 
         <div className="flex flex-1 flex-col p-6">
-          <h3 className="text-lg font-semibold text-white">{project.title}</h3>
+          <h3 className="font-heading text-lg font-semibold tracking-tight text-white">{project.title}</h3>
           <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-zinc-400">
             {project.description}
           </p>
@@ -58,7 +58,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-full border border-blue-500/30 px-3 py-1 text-xs text-zinc-300"
+                className="rounded-full border border-blue-500/30 px-3 py-1 font-mono text-xs text-zinc-300"
               >
                 {tag}
               </span>

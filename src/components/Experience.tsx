@@ -60,7 +60,7 @@ export default function Experience() {
       >
         <motion.span
           variants={item}
-          className="text-sm font-medium tracking-widest text-blue-400 uppercase"
+          className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase"
         >
           Experience
         </motion.span>
@@ -76,18 +76,18 @@ export default function Experience() {
             >
               <span className="absolute top-1.5 left-0 h-3 w-3 rounded-full border-2 border-blue-400 bg-[#0a0a0a] shadow-[0_0_8px_rgba(59,130,246,0.6)]" />
 
-              <h3 className="text-lg font-semibold text-white">{exp.role}</h3>
+              <h3 className="font-heading text-lg font-semibold tracking-tight text-white">{exp.role}</h3>
 
               <div className="mt-1 flex flex-wrap items-center gap-2 text-sm">
                 <span className="text-blue-400">{exp.company}</span>
                 {exp.duration && (
                   <>
                     <span className="text-zinc-600">·</span>
-                    <span className="text-zinc-400">{exp.duration}</span>
+                    <span className="font-mono text-zinc-400">{exp.duration}</span>
                   </>
                 )}
                 {exp.current && (
-                  <span className="rounded-full border border-blue-500/40 px-2 py-0.5 text-xs text-blue-300">
+                  <span className="rounded-full border border-blue-500/40 px-2 py-0.5 font-mono text-xs text-blue-300">
                     Current
                   </span>
                 )}

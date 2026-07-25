@@ -59,7 +59,7 @@ export default function Education() {
       >
         <motion.span
           variants={item}
-          className="text-sm font-medium tracking-widest text-blue-400 uppercase"
+          className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase"
         >
           Education
         </motion.span>
@@ -73,10 +73,10 @@ export default function Education() {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold text-white">
+            <h3 className="font-heading text-lg font-semibold tracking-tight text-white">
               B.E. Computer Science Engineering
             </h3>
-            <p className="mt-2 text-sm text-zinc-400">Graduated March 2025</p>
+            <p className="mt-2 font-mono text-sm text-zinc-400">Graduated March 2025</p>
           </div>
         </motion.div>
       </motion.div>

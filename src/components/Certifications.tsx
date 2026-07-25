@@ -139,7 +139,7 @@ export default function Certifications() {
       >
         <motion.span
           variants={item}
-          className="text-sm font-medium tracking-widest text-blue-400 uppercase"
+          className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase"
         >
           Certifications
         </motion.span>
@@ -157,10 +157,10 @@ export default function Certifications() {
                 <BadgeIcon />
               </div>
 
-              <h3 className="mt-4 text-base font-semibold text-white">
+              <h3 className="font-heading mt-4 text-base font-semibold tracking-tight text-white">
                 {cert.name}
               </h3>
-              <p className="mt-2 text-sm text-zinc-400">
+              <p className="mt-2 font-mono text-sm text-zinc-400">
                 {cert.issuer} · {cert.year}
               </p>
 

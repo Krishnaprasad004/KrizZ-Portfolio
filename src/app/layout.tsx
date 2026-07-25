@@ -1,17 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 import SmoothScroll from "@/components/SmoothScroll";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 import CommandPaletteProvider from "@/components/CommandPaletteProvider";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
 });
 
@@ -28,9 +23,16 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#0a0a0a]">
+      <head>
+        <link rel="preconnect" href="https://api.fontshare.com" />
+        <link
+          href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="font-body flex min-h-full flex-col bg-[#0a0a0a]">
         <ScrollProgressBar />
         <SmoothScroll>
           <CommandPaletteProvider>{children}</CommandPaletteProvider>

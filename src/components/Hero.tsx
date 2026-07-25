@@ -31,6 +31,27 @@ const photoItem = {
   },
 };
 
+const ORBS = [
+  {
+    className: "top-[10%] left-[12%] h-[350px] w-[350px]",
+    duration: 18,
+    drift: { x: [0, 50, -20, 0], y: [0, -40, 30, 0] },
+    opacity: 0.18,
+  },
+  {
+    className: "right-[10%] bottom-[8%] h-[420px] w-[420px]",
+    duration: 24,
+    drift: { x: [0, -45, 25, 0], y: [0, 35, -25, 0] },
+    opacity: 0.15,
+  },
+  {
+    className: "top-[18%] right-[18%] h-[280px] w-[280px]",
+    duration: 21,
+    drift: { x: [0, 30, -35, 0], y: [0, 25, 20, 0] },
+    opacity: 0.16,
+  },
+];
+
 export default function Hero() {
   return (
     <section className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-[#0a0a0a] px-6 text-center">
@@ -42,6 +63,27 @@ export default function Hero() {
             "radial-gradient(circle, rgba(59,130,246,0.25) 0%, rgba(59,130,246,0) 70%)",
         }}
       />
+
+      {ORBS.map((orb, i) => (
+        <motion.div
+          key={i}
+          aria-hidden
+          animate={{
+            x: orb.drift.x,
+            y: orb.drift.y,
+            scale: [1, 1.15, 0.92, 1],
+          }}
+          transition={{
+            duration: orb.duration,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className={`pointer-events-none absolute z-0 rounded-full blur-3xl ${orb.className}`}
+          style={{
+            background: `radial-gradient(circle, rgba(59,130,246,${orb.opacity}) 0%, rgba(59,130,246,0) 70%)`,
+          }}
+        />
+      ))}
 
       <motion.div
         variants={container}
@@ -65,7 +107,7 @@ export default function Hero() {
 
         <motion.h1
           variants={item}
-          className="text-4xl font-semibold tracking-tight text-white sm:text-5xl md:text-6xl"
+          className="font-heading text-4xl font-semibold tracking-tight text-white sm:text-5xl md:text-6xl"
         >
           Krishna Prasad H
         </motion.h1>

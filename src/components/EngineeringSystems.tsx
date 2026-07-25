@@ -127,7 +127,7 @@ export default function EngineeringSystems() {
       >
         <motion.span
           variants={item}
-          className="text-sm font-medium tracking-widest text-blue-400 uppercase"
+          className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase"
         >
           Engineering Systems
         </motion.span>
@@ -140,7 +140,7 @@ export default function EngineeringSystems() {
                   {pillar.icon}
                 </div>
 
-                <h3 className="mt-4 text-lg font-semibold text-white">
+                <h3 className="font-heading mt-4 text-lg font-semibold tracking-tight text-white">
                   {pillar.title}
                 </h3>
                 <p className="mt-2 text-sm text-zinc-400">
@@ -151,7 +151,7 @@ export default function EngineeringSystems() {
                   {pillar.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full border border-blue-500/30 px-3 py-1 text-xs text-zinc-300"
+                      className="rounded-full border border-blue-500/30 px-3 py-1 font-mono text-xs text-zinc-300"
                     >
                       {tag}
                     </span>
