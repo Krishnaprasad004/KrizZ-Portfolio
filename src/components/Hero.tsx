@@ -172,24 +172,24 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative z-10 flex min-h-screen w-full flex-col items-center justify-center overflow-hidden px-6 text-center">
+    <section className="relative z-10 flex min-h-screen w-full flex-col items-center justify-center overflow-hidden px-6 pt-24 pb-8 text-center">
       <motion.div
         variants={container}
         initial="hidden"
         animate="show"
         className="relative z-10 flex flex-col items-center"
       >
-        <div className="relative flex h-[440px] w-[440px] items-center justify-center">
-          <RingPath radius={160} />
-          <RingPath radius={190} />
+        <div className="relative flex h-[380px] w-[380px] items-center justify-center">
+          <RingPath radius={140} />
+          <RingPath radius={170} />
 
           <OrbitRing
-            radius={160}
+            radius={140}
             duration={20}
             labels={["Data Engineer", "Problem Solver"]}
           />
           <OrbitRing
-            radius={190}
+            radius={170}
             duration={30}
             reverse
             labels={["GenAI Explorer", "Builder"]}
@@ -197,14 +197,14 @@ export default function Hero() {
 
           <motion.div
             variants={photoItem}
-            className="relative z-10 h-[160px] w-[160px] overflow-hidden rounded-full border border-blue-500/60 shadow-[0_0_12px_rgba(59,130,246,0.5)] sm:h-[180px] sm:w-[180px]"
+            className="relative z-10 h-[140px] w-[140px] overflow-hidden rounded-full border border-blue-500/60 shadow-[0_0_12px_rgba(59,130,246,0.5)]"
           >
             <Image
               src="/profile.png"
               alt="Krishna Prasad H"
               fill
               priority
-              sizes="180px"
+              sizes="140px"
               className="rounded-full object-cover object-[center_8%]"
             />
           </motion.div>
@@ -212,19 +212,19 @@ export default function Hero() {
 
         <motion.h1
           variants={item}
-          className="font-heading relative z-10 mt-8 text-4xl font-semibold tracking-tight text-white sm:text-5xl md:text-6xl"
+          className="font-heading relative z-10 mt-4 text-4xl font-semibold tracking-tight text-white sm:text-5xl md:text-6xl"
         >
           Krishna Prasad H
         </motion.h1>
 
         <motion.p
           variants={item}
-          className="mt-4 text-lg text-zinc-100 [text-shadow:0_2px_10px_rgba(0,0,0,0.9)] sm:text-xl"
+          className="mt-3 text-lg text-zinc-100 [text-shadow:0_2px_10px_rgba(0,0,0,0.9)] sm:text-xl"
         >
           Data Engineer / Data Analyst
         </motion.p>
 
-        <motion.div variants={item} className="relative mt-10 inline-block">
+        <motion.div variants={item} className="relative mt-6 inline-block">
           <a
             href="#"
             onClick={triggerBurst}
