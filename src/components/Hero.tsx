@@ -67,6 +67,7 @@ function OrbitRing({
     <div
       className="absolute inset-0"
       style={{
+        zIndex: 1,
         animationName: "spin-cw",
         animationDuration: `${duration}s`,
         animationTimingFunction: "linear",
@@ -84,6 +85,8 @@ function OrbitRing({
             className="absolute top-1/2 left-1/2"
             style={{
               transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
+              zIndex: 1,
+              opacity: 1,
             }}
           >
             <div
@@ -93,6 +96,7 @@ function OrbitRing({
                 animationTimingFunction: "linear",
                 animationIterationCount: "infinite",
                 animationDirection: reverse ? "normal" : "reverse",
+                opacity: 1,
               }}
             >
               <OrbitLabel>{label}</OrbitLabel>
@@ -175,9 +179,9 @@ export default function Hero() {
         animate="show"
         className="relative z-10 flex flex-col items-center"
       >
-        <div className="relative flex h-[360px] w-[360px] items-center justify-center sm:h-[400px] sm:w-[400px]">
+        <div className="relative flex h-[440px] w-[440px] items-center justify-center">
           <RingPath radius={160} />
-          <RingPath radius={215} />
+          <RingPath radius={190} />
 
           <OrbitRing
             radius={160}
@@ -185,7 +189,7 @@ export default function Hero() {
             labels={["Data Engineer", "Problem Solver"]}
           />
           <OrbitRing
-            radius={215}
+            radius={190}
             duration={30}
             reverse
             labels={["GenAI Explorer", "Builder"]}
@@ -208,7 +212,7 @@ export default function Hero() {
 
         <motion.h1
           variants={item}
-          className="font-heading mt-2 text-4xl font-semibold tracking-tight text-white sm:text-5xl md:text-6xl"
+          className="font-heading relative z-10 mt-8 text-4xl font-semibold tracking-tight text-white sm:text-5xl md:text-6xl"
         >
           Krishna Prasad H
         </motion.h1>
