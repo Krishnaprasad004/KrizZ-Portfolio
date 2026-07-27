@@ -128,7 +128,7 @@ export default function Experience() {
   return (
     <section
       id="experience"
-      className="relative z-10 w-full overflow-hidden px-6 py-24 sm:py-32"
+      className="relative z-10 w-full scroll-mt-28 overflow-hidden px-6 py-24 sm:py-32"
     >
       <span
         aria-hidden

@@ -104,7 +104,7 @@ function CloseIcon() {
   );
 }
 
-const CARD_SPACING = 170;
+const CARD_SPACING = 300;
 const SIDE_TILT_DEG = 30;
 
 export default function Certifications() {
@@ -141,7 +141,7 @@ export default function Certifications() {
   return (
     <section
       id="certifications"
-      className="relative z-10 w-full overflow-x-hidden px-6 py-24 sm:py-32"
+      className="relative z-10 w-full scroll-mt-28 overflow-x-hidden px-6 py-24 sm:py-32"
     >
       <motion.div
         variants={container}
@@ -167,47 +167,52 @@ export default function Certifications() {
             const absOffset = Math.abs(offset);
 
             return (
-              <motion.button
+              <div
                 key={`${cert.issuer}-${cert.name}`}
-                type="button"
-                onClick={() => (isActive ? setOpenCert(cert) : setActive(index))}
-                animate={{
-                  x: offset * CARD_SPACING,
-                  z: isActive ? 50 : -100,
-                  rotateY: isActive ? 0 : -SIDE_TILT_DEG * absOffset,
-                  scale: isActive ? 1 : 0.82,
-                  opacity: absOffset > 1 ? 0 : isActive ? 1 : 0.55,
-                }}
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                style={{
-                  zIndex: total - absOffset,
-                  ...(isActive
-                    ? ({
-                        WebkitBoxReflect:
-                          "below 6px linear-gradient(to bottom, transparent, transparent, rgba(255,255,255,0.08))",
-                      } as React.CSSProperties)
-                    : {}),
-                }}
-                className="absolute w-[260px] cursor-pointer rounded-2xl border border-white/10 bg-white/[0.02] p-6 text-left transition-colors duration-300 hover:border-blue-500/50"
+                className="pointer-events-none absolute inset-0 flex items-center justify-center"
+                style={{ zIndex: total - absOffset }}
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-full border border-blue-500/30 bg-blue-500/10">
-                  <BadgeIcon />
-                </div>
+                <motion.button
+                  type="button"
+                  onClick={() => (isActive ? setOpenCert(cert) : setActive(index))}
+                  animate={{
+                    x: offset * CARD_SPACING,
+                    z: isActive ? 50 : -100,
+                    rotateY: isActive ? 0 : -SIDE_TILT_DEG * absOffset,
+                    scale: isActive ? 1 : 0.82,
+                    opacity: absOffset > 1 ? 0 : isActive ? 1 : 0.55,
+                  }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  style={{
+                    pointerEvents: "auto",
+                    ...(isActive
+                      ? ({
+                          WebkitBoxReflect:
+                            "below 6px linear-gradient(to bottom, transparent, transparent, rgba(255,255,255,0.08))",
+                        } as React.CSSProperties)
+                      : {}),
+                  }}
+                  className="w-[260px] cursor-pointer rounded-2xl border border-white/10 bg-white/[0.02] p-6 text-left transition-colors duration-300 hover:border-blue-500/50"
+                >
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full border border-blue-500/30 bg-blue-500/10">
+                    <BadgeIcon />
+                  </div>
 
-                <h3 className="font-heading mt-4 text-base font-semibold tracking-tight text-white">
-                  {cert.name}
-                </h3>
-                <p className="mt-2 font-mono text-sm text-zinc-400">
-                  {cert.issuer} · {cert.year}
-                </p>
+                  <h3 className="font-heading mt-4 text-base font-semibold tracking-tight text-white">
+                    {cert.name}
+                  </h3>
+                  <p className="mt-2 font-mono text-sm text-zinc-400">
+                    {cert.issuer} · {cert.year}
+                  </p>
 
-                {isActive && (
-                  <span className="mt-4 flex items-center gap-1.5 text-xs font-medium text-blue-400">
-                    <ViewIcon />
-                    View Certificate
-                  </span>
-                )}
-              </motion.button>
+                  {isActive && (
+                    <span className="mt-4 flex items-center gap-1.5 text-xs font-medium text-blue-400">
+                      <ViewIcon />
+                      View Certificate
+                    </span>
+                  )}
+                </motion.button>
+              </div>
             );
           })}
         </div>

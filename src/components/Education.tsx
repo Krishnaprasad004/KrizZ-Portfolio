@@ -49,7 +49,7 @@ export default function Education() {
   return (
     <section
       id="education"
-      className="relative z-10 w-full px-6 py-24 sm:py-32"
+      className="relative z-10 w-full scroll-mt-28 px-6 py-24 sm:py-32"
     >
       <motion.div
         variants={container}

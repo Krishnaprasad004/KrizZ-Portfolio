@@ -77,7 +77,7 @@ const item = {
 
 export default function About() {
   return (
-    <section id="about" className="relative z-10 w-full px-6 py-24 sm:py-32">
+    <section id="about" className="relative z-10 w-full scroll-mt-28 px-6 py-24 sm:py-32">
       <motion.div
         variants={container}
         initial="hidden"
