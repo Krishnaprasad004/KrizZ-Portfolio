@@ -2,8 +2,7 @@
 
 import { motion } from "motion/react";
 import Image from "next/image";
-import { Vortex } from "@/components/ui/vortex";
-import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
+import { OrbitingCircles } from "@/components/ui/orbiting-circles";
 
 const container = {
   hidden: {},
@@ -33,29 +32,37 @@ const photoItem = {
   },
 };
 
+function OrbitLabel({ children }: { children: string }) {
+  return (
+    <span className="font-mono text-[11px] whitespace-nowrap text-sky-300 rounded-full border border-[#38bdf8]/40 bg-[#0a0a0a] px-3 py-1 shadow-[0_0_10px_rgba(56,189,248,0.25)]">
+      {children}
+    </span>
+  );
+}
+
 export default function Hero() {
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-[#0a0a0a]">
-      <Vortex
-        backgroundColor="#000000"
-        baseHue={220}
-        rangeHue={30}
-        particleCount={450}
-        rangeY={800}
-        baseSpeed={0.1}
-        rangeSpeed={1.2}
-        containerClassName="min-h-screen w-full"
-        className="flex min-h-screen w-full flex-col items-center justify-center px-6 py-8 text-center"
+    <section className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-[#0a0a0a] px-6 text-center">
+      <motion.div
+        variants={container}
+        initial="hidden"
+        animate="show"
+        className="relative z-10 flex flex-col items-center"
       >
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="show"
-          className="relative z-10 flex flex-col items-center"
-        >
+        <div className="relative flex h-[420px] w-[420px] items-center justify-center sm:h-[480px] sm:w-[480px]">
+          <OrbitingCircles radius={160} duration={20}>
+            <OrbitLabel>Data Engineer</OrbitLabel>
+            <OrbitLabel>Problem Solver</OrbitLabel>
+          </OrbitingCircles>
+
+          <OrbitingCircles radius={215} duration={30} reverse>
+            <OrbitLabel>GenAI Explorer</OrbitLabel>
+            <OrbitLabel>Builder</OrbitLabel>
+          </OrbitingCircles>
+
           <motion.div
             variants={photoItem}
-            className="relative mb-6 h-[160px] w-[160px] overflow-hidden rounded-full border border-blue-500/60 shadow-[0_0_12px_rgba(59,130,246,0.5)] sm:h-[180px] sm:w-[180px]"
+            className="relative z-10 h-[160px] w-[160px] overflow-hidden rounded-full border border-blue-500/60 shadow-[0_0_12px_rgba(59,130,246,0.5)] sm:h-[180px] sm:w-[180px]"
           >
             <Image
               src="/profile.png"
@@ -66,29 +73,30 @@ export default function Hero() {
               className="rounded-full object-cover object-[center_8%]"
             />
           </motion.div>
+        </div>
 
-          <motion.h1
-            variants={item}
-            className="font-heading text-4xl font-semibold tracking-tight text-white sm:text-5xl md:text-6xl"
-          >
-            Krishna Prasad H
-          </motion.h1>
+        <motion.h1
+          variants={item}
+          className="font-heading mt-6 text-4xl font-semibold tracking-tight text-white sm:text-5xl md:text-6xl"
+        >
+          Krishna Prasad H
+        </motion.h1>
 
-          <TextGenerateEffect
-            words="Data Engineer / Data Analyst"
-            duration={0.5}
-            className="mt-4 text-lg text-zinc-100 [text-shadow:0_2px_10px_rgba(0,0,0,0.9)] sm:text-xl"
-          />
+        <motion.p
+          variants={item}
+          className="mt-4 text-lg text-zinc-100 [text-shadow:0_2px_10px_rgba(0,0,0,0.9)] sm:text-xl"
+        >
+          Data Engineer / Data Analyst
+        </motion.p>
 
-          <motion.a
-            variants={item}
-            href="#"
-            className="mt-10 rounded-full border border-blue-500/60 px-8 py-3 text-sm font-medium text-white shadow-[0_0_12px_rgba(59,130,246,0.5)] transition-shadow duration-300 hover:shadow-[0_0_24px_rgba(59,130,246,0.8)]"
-          >
-            View My Work
-          </motion.a>
-        </motion.div>
-      </Vortex>
+        <motion.a
+          variants={item}
+          href="#"
+          className="mt-10 rounded-full border border-blue-500/60 px-8 py-3 text-sm font-medium text-white shadow-[0_0_12px_rgba(59,130,246,0.5)] transition-shadow duration-300 hover:shadow-[0_0_24px_rgba(59,130,246,0.8)]"
+        >
+          View My Work
+        </motion.a>
+      </motion.div>
     </section>
   );
 }

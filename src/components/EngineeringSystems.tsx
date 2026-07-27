@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 interface Pillar {
   title: string;
   description: string;
-  tags: string[];
+  pipeline: string[];
   note?: string;
   icon: React.ReactNode;
 }
@@ -71,23 +71,61 @@ function GenAiIcon() {
   );
 }
 
+function ArrowIcon() {
+  return (
+    <svg
+      viewBox="0 0 16 16"
+      fill="none"
+      className="h-3 w-3 shrink-0 text-[#38bdf8]"
+      aria-hidden
+    >
+      <path
+        d="M2 8h11M9 4l4 4-4 4"
+        stroke="currentColor"
+        strokeWidth={1.75}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function PipelineFlow({ steps }: { steps: string[] }) {
+  return (
+    <div className="mt-auto flex flex-wrap items-center gap-y-2 pt-5">
+      {steps.map((step, i) => (
+        <div key={step} className="flex items-center">
+          <span className="rounded-md border border-blue-500/30 bg-white/[0.02] px-2.5 py-1 font-mono text-[11px] whitespace-nowrap text-zinc-300">
+            {step}
+          </span>
+          {i < steps.length - 1 && (
+            <span className="mx-1.5 flex items-center">
+              <ArrowIcon />
+            </span>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 const PILLARS: Pillar[] = [
   {
     title: "Data Engineering",
     description: "Building scalable pipelines and data infrastructure.",
-    tags: ["Databricks", "PySpark", "ETL", "Medallion Architecture"],
+    pipeline: ["Sources", "ETL", "Databricks", "Warehouse", "Dashboards"],
     icon: <DataEngineeringIcon />,
   },
   {
     title: "BI & Analytics",
     description: "Turning raw data into dashboards and decisions.",
-    tags: ["Power BI", "DAX", "Excel", "SQL"],
+    pipeline: ["Raw Data", "SQL", "Power BI", "Dashboards", "Decisions"],
     icon: <BiAnalyticsIcon />,
   },
   {
     title: "GenAI",
     description: "Applying LLMs to real-world workflows.",
-    tags: ["LLMs", "Prompt Engineering"],
+    pipeline: ["Input", "LLM", "RAG Retrieval", "Response"],
     note: "Currently exploring — RAG project in progress",
     icon: <GenAiIcon />,
   },
@@ -147,16 +185,7 @@ export default function EngineeringSystems() {
                   {pillar.description}
                 </p>
 
-                <div className="mt-auto flex flex-wrap gap-2 pt-5">
-                  {pillar.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full border border-blue-500/30 px-3 py-1 font-mono text-xs text-zinc-300"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+                <PipelineFlow steps={pillar.pipeline} />
 
                 {pillar.note && (
                   <p className="mt-4 text-xs text-zinc-500 italic">

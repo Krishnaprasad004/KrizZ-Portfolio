@@ -1,34 +1,28 @@
 "use client";
 
 import { motion } from "motion/react";
-import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 
 interface SkillCategory {
   category: string;
   skills: string[];
-  className: string;
 }
 
 const SKILL_CATEGORIES: SkillCategory[] = [
   {
-    category: "Data Engineering",
-    skills: ["Databricks", "PySpark", "FastAPI", "ETL", "ELT"],
-    className: "md:col-span-2",
-  },
-  {
     category: "Data & BI",
     skills: ["Power BI", "DAX"],
-    className: "md:col-span-1",
+  },
+  {
+    category: "Data Engineering",
+    skills: ["Databricks", "PySpark", "FastAPI", "ETL", "ELT"],
   },
   {
     category: "GenAI",
     skills: ["LLMs", "Prompt Engineering", "RAG"],
-    className: "md:col-span-1",
   },
   {
     category: "Tools",
     skills: ["Git", "GitHub"],
-    className: "md:col-span-2",
   },
 ];
 
@@ -68,28 +62,27 @@ export default function Skills() {
           Skills
         </motion.span>
 
-        <BentoGrid className="max-w-none md:grid-cols-3 md:auto-rows-[10rem]">
+        <div className="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {SKILL_CATEGORIES.map((group) => (
-            <motion.div key={group.category} variants={item} className={group.className}>
-              <BentoGridItem
-                title={group.category}
-                className="h-full"
-                header={
-                  <div className="flex flex-wrap gap-2">
-                    {group.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="rounded-full border border-blue-500/30 px-3 py-1 font-mono text-xs text-zinc-300"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                }
-              />
+            <motion.div key={group.category} variants={item} className="h-full">
+              <div className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-colors duration-300 hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.25)]">
+                <h3 className="font-heading text-sm font-semibold tracking-tight text-white">
+                  {group.category}
+                </h3>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {group.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="rounded-full border border-blue-500/30 px-3 py-1 font-mono text-xs text-zinc-300"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </motion.div>
           ))}
-        </BentoGrid>
+        </div>
       </motion.div>
     </section>
   );
