@@ -1,7 +1,9 @@
 "use client";
 
-import { motion } from "motion/react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
+import StarField from "@/components/StarField";
 
 const container = {
   hidden: {},
@@ -103,9 +105,73 @@ function OrbitRing({
   );
 }
 
+const PARTICLE_COUNT = 14;
+
+interface Particle {
+  id: number;
+  dx: number;
+  dy: number;
+  size: number;
+  delay: number;
+}
+
+function createParticles(): Particle[] {
+  return Array.from({ length: PARTICLE_COUNT }, (_, i) => {
+    const angle = (360 / PARTICLE_COUNT) * i + (Math.random() * 20 - 10);
+    const distance = 44 + Math.random() * 32;
+    const rad = (angle * Math.PI) / 180;
+    return {
+      id: i,
+      dx: Math.cos(rad) * distance,
+      dy: Math.sin(rad) * distance,
+      size: 3 + Math.random() * 3,
+      delay: Math.random() * 0.05,
+    };
+  });
+}
+
+function ParticleBurst({ particles }: { particles: Particle[] }) {
+  return (
+    <>
+      {particles.map((p) => (
+        <motion.span
+          key={p.id}
+          initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+          animate={{ x: p.dx, y: p.dy, opacity: 0, scale: 0.3 }}
+          transition={{ duration: 0.65, delay: p.delay, ease: "easeOut" }}
+          className="absolute top-1/2 left-1/2 rounded-full bg-[#3b82f6]"
+          style={{
+            width: p.size,
+            height: p.size,
+            marginLeft: -p.size / 2,
+            marginTop: -p.size / 2,
+          }}
+        />
+      ))}
+    </>
+  );
+}
+
+interface Burst {
+  id: number;
+  particles: Particle[];
+}
+
 export default function Hero() {
+  const [bursts, setBursts] = useState<Burst[]>([]);
+
+  const triggerBurst = () => {
+    const id = Date.now() + Math.random();
+    setBursts((prev) => [...prev, { id, particles: createParticles() }]);
+    setTimeout(() => {
+      setBursts((prev) => prev.filter((b) => b.id !== id));
+    }, 700);
+  };
+
   return (
     <section className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-[#0a0a0a] px-6 text-center">
+      <StarField />
+
       <motion.div
         variants={container}
         initial="hidden"
@@ -157,13 +223,23 @@ export default function Hero() {
           Data Engineer / Data Analyst
         </motion.p>
 
-        <motion.a
-          variants={item}
-          href="#"
-          className="mt-10 rounded-full border border-blue-500/60 px-8 py-3 text-sm font-medium text-white shadow-[0_0_12px_rgba(59,130,246,0.5)] transition-shadow duration-300 hover:shadow-[0_0_24px_rgba(59,130,246,0.8)]"
-        >
-          View My Work
-        </motion.a>
+        <motion.div variants={item} className="relative mt-10 inline-block">
+          <a
+            href="#"
+            onClick={triggerBurst}
+            className="relative z-10 block rounded-full border border-blue-500/60 px-8 py-3 text-sm font-medium text-white shadow-[0_0_12px_rgba(59,130,246,0.5)] transition-shadow duration-300 hover:shadow-[0_0_24px_rgba(59,130,246,0.8)]"
+          >
+            View My Work
+          </a>
+
+          <div className="pointer-events-none absolute inset-0 z-0">
+            <AnimatePresence>
+              {bursts.map((burst) => (
+                <ParticleBurst key={burst.id} particles={burst.particles} />
+              ))}
+            </AnimatePresence>
+          </div>
+        </motion.div>
       </motion.div>
     </section>
   );
