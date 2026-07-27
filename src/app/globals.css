@@ -13,18 +13,24 @@
   --font-heading: "Clash Display", sans-serif;
   --font-body: "Satoshi", sans-serif;
   --font-mono: var(--font-jetbrains-mono);
-  --animate-orbit: orbit calc(var(--duration)*1s) linear infinite;
-  @keyframes orbit {
-  0% {
-    transform: rotate(calc(var(--angle) * 1deg)) translateY(calc(var(--radius) * 1px)) rotate(calc(var(--angle) * -1deg));
-    }
-  100% {
-    transform: rotate(calc(var(--angle) * 1deg + 360deg)) translateY(calc(var(--radius) * 1px)) rotate(calc((var(--angle) * -1deg) - 360deg));
-    }
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+@keyframes spin-cw {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }

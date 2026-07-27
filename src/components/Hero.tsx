@@ -2,7 +2,6 @@
 
 import { motion } from "motion/react";
 import Image from "next/image";
-import { OrbitingCircles } from "@/components/ui/orbiting-circles";
 
 const container = {
   hidden: {},
@@ -34,9 +33,73 @@ const photoItem = {
 
 function OrbitLabel({ children }: { children: string }) {
   return (
-    <span className="font-mono text-[11px] whitespace-nowrap text-sky-300 rounded-full border border-[#38bdf8]/40 bg-[#0a0a0a] px-3 py-1 shadow-[0_0_10px_rgba(56,189,248,0.25)]">
+    <span className="whitespace-nowrap rounded-full border border-[#38bdf8]/40 bg-[#0a0a0a] px-3 py-1 font-mono text-[11px] text-sky-300 shadow-[0_0_10px_rgba(56,189,248,0.25)]">
       {children}
     </span>
+  );
+}
+
+function RingPath({ radius }: { radius: number }) {
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#38bdf8]/20"
+      style={{ width: radius * 2, height: radius * 2 }}
+    />
+  );
+}
+
+function OrbitRing({
+  radius,
+  duration,
+  reverse,
+  labels,
+}: {
+  radius: number;
+  duration: number;
+  reverse?: boolean;
+  labels: string[];
+}) {
+  const angleStep = 360 / labels.length;
+
+  return (
+    <div
+      className="absolute inset-0"
+      style={{
+        animationName: "spin-cw",
+        animationDuration: `${duration}s`,
+        animationTimingFunction: "linear",
+        animationIterationCount: "infinite",
+        animationDirection: reverse ? "reverse" : "normal",
+      }}
+    >
+      {labels.map((label, i) => {
+        const angleRad = (angleStep * i * Math.PI) / 180;
+        const x = radius * Math.cos(angleRad);
+        const y = radius * Math.sin(angleRad);
+        return (
+          <div
+            key={label}
+            className="absolute top-1/2 left-1/2"
+            style={{
+              transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
+            }}
+          >
+            <div
+              style={{
+                animationName: "spin-cw",
+                animationDuration: `${duration}s`,
+                animationTimingFunction: "linear",
+                animationIterationCount: "infinite",
+                animationDirection: reverse ? "normal" : "reverse",
+              }}
+            >
+              <OrbitLabel>{label}</OrbitLabel>
+            </div>
+          </div>
+        );
+      })}
+    </div>
   );
 }
 
@@ -50,15 +113,20 @@ export default function Hero() {
         className="relative z-10 flex flex-col items-center"
       >
         <div className="relative flex h-[420px] w-[420px] items-center justify-center sm:h-[480px] sm:w-[480px]">
-          <OrbitingCircles radius={160} duration={20}>
-            <OrbitLabel>Data Engineer</OrbitLabel>
-            <OrbitLabel>Problem Solver</OrbitLabel>
-          </OrbitingCircles>
+          <RingPath radius={160} />
+          <RingPath radius={215} />
 
-          <OrbitingCircles radius={215} duration={30} reverse>
-            <OrbitLabel>GenAI Explorer</OrbitLabel>
-            <OrbitLabel>Builder</OrbitLabel>
-          </OrbitingCircles>
+          <OrbitRing
+            radius={160}
+            duration={20}
+            labels={["Data Engineer", "Problem Solver"]}
+          />
+          <OrbitRing
+            radius={215}
+            duration={30}
+            reverse
+            labels={["GenAI Explorer", "Builder"]}
+          />
 
           <motion.div
             variants={photoItem}
