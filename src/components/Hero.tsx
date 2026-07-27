@@ -1,8 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import Image from "next/image";
+import { getLenis } from "@/lib/lenis";
+
+const ROLES = ["Data Engineer", "BI Analyst", "GenAI Explorer"];
+const ROLE_INTERVAL_MS = 2600;
 
 const container = {
   hidden: {},
@@ -23,225 +26,123 @@ const item = {
   },
 };
 
-const photoItem = {
-  hidden: { opacity: 0, scale: 0.85 },
-  show: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
-  },
-};
+function RotatingRole() {
+  const [index, setIndex] = useState(0);
 
-function OrbitLabel({ children }: { children: string }) {
-  return (
-    <span className="whitespace-nowrap rounded-full border border-[#38bdf8]/40 bg-[#0a0a0a] px-3 py-1 font-mono text-[11px] text-sky-300 shadow-[0_0_10px_rgba(56,189,248,0.25)]">
-      {children}
-    </span>
-  );
-}
-
-function RingPath({ radius }: { radius: number }) {
-  return (
-    <div
-      aria-hidden
-      className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#38bdf8]/20"
-      style={{ width: radius * 2, height: radius * 2 }}
-    />
-  );
-}
-
-function OrbitRing({
-  radius,
-  duration,
-  reverse,
-  labels,
-}: {
-  radius: number;
-  duration: number;
-  reverse?: boolean;
-  labels: string[];
-}) {
-  const angleStep = 360 / labels.length;
+  useEffect(() => {
+    const id = setInterval(() => {
+      setIndex((i) => (i + 1) % ROLES.length);
+    }, ROLE_INTERVAL_MS);
+    return () => clearInterval(id);
+  }, []);
 
   return (
-    <div
-      className="absolute inset-0"
-      style={{
-        zIndex: 1,
-        animationName: "spin-cw",
-        animationDuration: `${duration}s`,
-        animationTimingFunction: "linear",
-        animationIterationCount: "infinite",
-        animationDirection: reverse ? "reverse" : "normal",
-      }}
-    >
-      {labels.map((label, i) => {
-        const angleRad = (angleStep * i * Math.PI) / 180;
-        const x = radius * Math.cos(angleRad);
-        const y = radius * Math.sin(angleRad);
-        return (
-          <div
-            key={label}
-            className="absolute top-1/2 left-1/2"
-            style={{
-              transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
-              zIndex: 1,
-              opacity: 1,
-            }}
-          >
-            <div
-              style={{
-                animationName: "spin-cw",
-                animationDuration: `${duration}s`,
-                animationTimingFunction: "linear",
-                animationIterationCount: "infinite",
-                animationDirection: reverse ? "normal" : "reverse",
-                opacity: 1,
-              }}
-            >
-              <OrbitLabel>{label}</OrbitLabel>
-            </div>
-          </div>
-        );
-      })}
+    <div className="relative h-8 w-56 overflow-hidden sm:h-9 sm:w-64">
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={ROLES[index]}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -12 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute inset-0 flex items-center justify-center text-lg text-blue-300 sm:text-xl"
+        >
+          {ROLES[index]}
+        </motion.span>
+      </AnimatePresence>
     </div>
   );
 }
 
-const PARTICLE_COUNT = 14;
-
-interface Particle {
-  id: number;
-  dx: number;
-  dy: number;
-  size: number;
-  delay: number;
-}
-
-function createParticles(): Particle[] {
-  return Array.from({ length: PARTICLE_COUNT }, (_, i) => {
-    const angle = (360 / PARTICLE_COUNT) * i + (Math.random() * 20 - 10);
-    const distance = 44 + Math.random() * 32;
-    const rad = (angle * Math.PI) / 180;
-    return {
-      id: i,
-      dx: Math.cos(rad) * distance,
-      dy: Math.sin(rad) * distance,
-      size: 3 + Math.random() * 3,
-      delay: Math.random() * 0.05,
-    };
-  });
-}
-
-function ParticleBurst({ particles }: { particles: Particle[] }) {
+function ScrollIndicator() {
   return (
-    <>
-      {particles.map((p) => (
-        <motion.span
-          key={p.id}
-          initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
-          animate={{ x: p.dx, y: p.dy, opacity: 0, scale: 0.3 }}
-          transition={{ duration: 0.65, delay: p.delay, ease: "easeOut" }}
-          className="absolute top-1/2 left-1/2 rounded-full bg-[#3b82f6]"
-          style={{
-            width: p.size,
-            height: p.size,
-            marginLeft: -p.size / 2,
-            marginTop: -p.size / 2,
-          }}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 1.3, duration: 0.6 }}
+      className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-zinc-500"
+    >
+      <span className="font-mono text-[11px] tracking-widest uppercase">
+        Scroll
+      </span>
+      <motion.svg
+        viewBox="0 0 16 24"
+        className="h-5 w-3.5 text-blue-400"
+        animate={{ y: [0, 6, 0] }}
+        transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <path
+          d="M8 1v18M2 13l6 6 6-6"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={1.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
-      ))}
-    </>
+      </motion.svg>
+    </motion.div>
   );
 }
 
-interface Burst {
-  id: number;
-  particles: Particle[];
-}
-
 export default function Hero() {
-  const [bursts, setBursts] = useState<Burst[]>([]);
-
-  const triggerBurst = () => {
-    const id = Date.now() + Math.random();
-    setBursts((prev) => [...prev, { id, particles: createParticles() }]);
-    setTimeout(() => {
-      setBursts((prev) => prev.filter((b) => b.id !== id));
-    }, 700);
+  const handleScrollTo = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    const lenis = getLenis();
+    if (!lenis) return;
+    event.preventDefault();
+    lenis.scrollTo(href);
   };
 
   return (
-    <section className="relative z-10 flex min-h-screen w-full flex-col items-center justify-center overflow-hidden px-6 pt-24 pb-8 text-center">
+    <section className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden px-6 pt-24 pb-8 text-center">
       <motion.div
         variants={container}
         initial="hidden"
         animate="show"
         className="relative z-10 flex flex-col items-center"
       >
-        <div className="relative flex h-[380px] w-[380px] items-center justify-center">
-          <RingPath radius={140} />
-          <RingPath radius={170} />
-
-          <OrbitRing
-            radius={140}
-            duration={20}
-            labels={["Data Engineer", "Problem Solver"]}
-          />
-          <OrbitRing
-            radius={170}
-            duration={30}
-            reverse
-            labels={["GenAI Explorer", "Builder"]}
-          />
-
-          <motion.div
-            variants={photoItem}
-            className="relative z-10 h-[140px] w-[140px] overflow-hidden rounded-full border border-blue-500/60 shadow-[0_0_12px_rgba(59,130,246,0.5)]"
-          >
-            <Image
-              src="/profile.png"
-              alt="Krishna Prasad H"
-              fill
-              priority
-              sizes="140px"
-              className="rounded-full object-cover object-[center_8%]"
-            />
-          </motion.div>
-        </div>
-
         <motion.h1
           variants={item}
-          className="font-heading relative z-10 mt-4 text-4xl font-semibold tracking-tight text-white sm:text-5xl md:text-6xl"
+          className="font-heading text-4xl font-semibold tracking-tight text-white sm:text-5xl md:text-6xl"
         >
           Krishna Prasad H
         </motion.h1>
 
+        <motion.div variants={item} className="mt-4">
+          <RotatingRole />
+        </motion.div>
+
         <motion.p
           variants={item}
-          className="mt-3 text-lg text-zinc-100 [text-shadow:0_2px_10px_rgba(0,0,0,0.9)] sm:text-xl"
+          className="mt-2 max-w-md text-base text-zinc-400 sm:text-lg"
         >
-          Data Engineer / Data Analyst
+          Turning raw data into systems people can actually act on.
         </motion.p>
 
-        <motion.div variants={item} className="relative mt-6 inline-block">
+        <motion.div
+          variants={item}
+          className="mt-8 flex flex-wrap items-center justify-center gap-4"
+        >
           <a
-            href="#"
-            onClick={triggerBurst}
-            className="relative z-10 block rounded-full border border-blue-500/60 px-8 py-3 text-sm font-medium text-white shadow-[0_0_12px_rgba(59,130,246,0.5)] transition-shadow duration-300 hover:shadow-[0_0_24px_rgba(59,130,246,0.8)]"
+            href="#projects"
+            onClick={(e) => handleScrollTo(e, "#projects")}
+            className="rounded-full border border-blue-500/60 px-8 py-3 text-sm font-medium text-white shadow-[0_0_12px_rgba(59,130,246,0.5)] transition-shadow duration-300 hover:shadow-[0_0_24px_rgba(59,130,246,0.8)]"
           >
-            View My Work
+            View Projects
           </a>
-
-          <div className="pointer-events-none absolute inset-0 z-0">
-            <AnimatePresence>
-              {bursts.map((burst) => (
-                <ParticleBurst key={burst.id} particles={burst.particles} />
-              ))}
-            </AnimatePresence>
-          </div>
+          <a
+            href="#contact"
+            onClick={(e) => handleScrollTo(e, "#contact")}
+            className="rounded-full border border-white/15 px-8 py-3 text-sm font-medium text-zinc-200 transition-colors duration-300 hover:border-blue-500/50 hover:text-white"
+          >
+            Get In Touch
+          </a>
         </motion.div>
       </motion.div>
+
+      <ScrollIndicator />
     </section>
   );
 }
