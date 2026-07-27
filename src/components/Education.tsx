@@ -67,7 +67,7 @@ export default function Education() {
 
         <motion.div
           variants={item}
-          className="flex items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-colors duration-300 hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.25)]"
+          className="flex items-start gap-4 rounded-2xl border border-white/10 border-l-4 border-l-blue-500 bg-white/5 p-6 backdrop-blur-md transition-colors duration-300 hover:border-l-blue-400 hover:shadow-[0_0_30px_rgba(59,130,246,0.25)]"
         >
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-blue-500/30 bg-blue-500/10">
             <CapIcon />
@@ -77,7 +77,9 @@ export default function Education() {
             <h3 className="font-heading text-lg font-semibold tracking-tight text-white">
               B.E. Computer Science Engineering
             </h3>
-            <p className="mt-2 font-mono text-sm text-zinc-400">Graduated March 2025</p>
+            <p className="mt-2 font-mono text-sm text-zinc-400">
+              Graduated March 2025
+            </p>
           </div>
         </motion.div>
       </motion.div>

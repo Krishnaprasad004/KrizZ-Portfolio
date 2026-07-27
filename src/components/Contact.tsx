@@ -3,45 +3,61 @@
 import { motion } from "motion/react";
 import ConstellationMotif from "@/components/ConstellationMotif";
 
-const LINKS = [
-  {
-    label: "GitHub",
-    href: "https://github.com/Krishnaprasad004",
-    external: true,
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
-        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z" />
-      </svg>
-    ),
-  },
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/krishna-prasad-h-515a81194/",
-    external: true,
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
-        <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z" />
-      </svg>
-    ),
-  },
-  {
-    label: "Email",
-    href: "mailto:prasadkamal04@gmail.com",
-    external: false,
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.8}
-        className="h-4 w-4"
-      >
-        <rect x="2.5" y="4.5" width="19" height="15" rx="2" />
-        <path d="m3 6 9 7 9-7" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-];
+const ROLES = ["Data Engineer", "BI Analyst", "GenAI Explorer"];
+
+const GITHUB_URL = "https://github.com/Krishnaprasad004";
+const LINKEDIN_URL = "https://www.linkedin.com/in/krishna-prasad-h-515a81194/";
+const EMAIL = "prasadkamal04@gmail.com";
+
+function MailIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.8}
+      className="h-4 w-4"
+    >
+      <rect x="2.5" y="4.5" width="19" height="15" rx="2" />
+      <path d="m3 6 9 7 9-7" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function LinkIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.8}
+      className="h-4 w-4"
+    >
+      <path
+        d="M9.5 14.5 14.5 9.5M11 6.5l1.5-1.5a3.5 3.5 0 0 1 5 5L16 11.5M13 17.5 11.5 19a3.5 3.5 0 0 1-5-5L8 12.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function ShareIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.8}
+      className="h-4 w-4"
+    >
+      <circle cx="6" cy="12" r="2.5" />
+      <circle cx="18" cy="6" r="2.5" />
+      <circle cx="18" cy="18" r="2.5" />
+      <path d="m8.2 10.8 7.6-3.6M8.2 13.2l7.6 3.6" strokeLinecap="round" />
+    </svg>
+  );
+}
 
 const container = {
   hidden: {},
@@ -66,21 +82,35 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative z-10 w-full px-6 py-24 text-center sm:py-32"
+      className="relative z-10 w-full overflow-hidden px-6 py-24 text-center sm:py-32"
     >
+      <span
+        aria-hidden
+        className="font-heading pointer-events-none absolute top-1/2 left-1/2 z-0 -translate-x-1/2 -translate-y-1/2 text-[140px] leading-none font-bold text-white/[0.03] select-none sm:text-[220px] md:text-[280px]"
+      >
+        HIRE
+      </span>
+
       <motion.div
         variants={container}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.3 }}
-        className="mx-auto flex max-w-2xl flex-col items-center gap-6"
+        className="relative z-10 mx-auto flex max-w-2xl flex-col items-center gap-6"
       >
-        <motion.div variants={item} className="flex items-center justify-center gap-3">
-          <h2 className="font-heading text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-            Let&apos;s Connect
-          </h2>
+        <motion.div variants={item} className="flex items-center gap-3">
+          <span className="rounded-full border border-blue-500/40 bg-blue-500/10 px-4 py-1.5 font-mono text-xs font-medium tracking-widest text-blue-300 uppercase backdrop-blur-md">
+            Available for Hire
+          </span>
           <ConstellationMotif className="hidden sm:block" />
         </motion.div>
+
+        <motion.h2
+          variants={item}
+          className="font-heading text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl"
+        >
+          {ROLES.join(" / ")}
+        </motion.h2>
 
         <motion.p variants={item} className="text-lg text-zinc-400">
           Have a project in mind or just want to say hi? Reach out — I&apos;d
@@ -91,19 +121,57 @@ export default function Contact() {
           variants={item}
           className="mt-4 flex flex-wrap items-center justify-center gap-4"
         >
-          {LINKS.map((link) => (
+          <a
+            href={`mailto:${EMAIL}`}
+            className="flex items-center gap-2 rounded-full border border-blue-500/60 bg-blue-500 px-6 py-3 text-sm font-medium text-white shadow-[0_0_12px_rgba(59,130,246,0.5)] transition-shadow duration-300 hover:shadow-[0_0_24px_rgba(59,130,246,0.8)]"
+          >
+            <MailIcon />
+            Hire Me
+          </a>
+          <a
+            href={LINKEDIN_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-medium text-zinc-200 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50 hover:text-white"
+          >
+            Connect on LinkedIn
+          </a>
+        </motion.div>
+
+        <motion.div
+          variants={item}
+          className="mt-16 flex w-full flex-col items-center gap-4 border-t border-white/10 pt-8"
+        >
+          <div className="flex items-center gap-4">
             <a
-              key={link.label}
-              href={link.href}
-              {...(link.external
-                ? { target: "_blank", rel: "noopener noreferrer" }
-                : {})}
-              className="flex items-center gap-2 rounded-full border border-blue-500/60 px-6 py-3 text-sm font-medium text-white shadow-[0_0_12px_rgba(59,130,246,0.5)] transition-shadow duration-300 hover:shadow-[0_0_24px_rgba(59,130,246,0.8)]"
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-zinc-400 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50 hover:text-blue-400"
             >
-              {link.icon}
-              {link.label}
+              <LinkIcon />
             </a>
-          ))}
+            <a
+              href={LINKEDIN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-zinc-400 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50 hover:text-blue-400"
+            >
+              <ShareIcon />
+            </a>
+            <a
+              href={`mailto:${EMAIL}`}
+              aria-label="Email"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-zinc-400 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50 hover:text-blue-400"
+            >
+              <MailIcon />
+            </a>
+          </div>
+          <p className="font-mono text-xs text-zinc-500">
+            © 2026 Krishna Prasad H. All rights reserved.
+          </p>
         </motion.div>
       </motion.div>
     </section>

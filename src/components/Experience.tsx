@@ -128,14 +128,21 @@ export default function Experience() {
   return (
     <section
       id="experience"
-      className="relative z-10 w-full px-6 py-24 sm:py-32"
+      className="relative z-10 w-full overflow-hidden px-6 py-24 sm:py-32"
     >
+      <span
+        aria-hidden
+        className="font-heading pointer-events-none absolute top-1/2 left-1/2 z-0 -translate-x-1/2 -translate-y-1/2 text-[220px] leading-none font-bold text-white/[0.03] select-none sm:text-[320px]"
+      >
+        04
+      </span>
+
       <motion.div
         variants={container}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.3 }}
-        className="mx-auto flex max-w-3xl flex-col gap-10"
+        className="relative z-10 mx-auto flex max-w-3xl flex-col gap-10"
       >
         <motion.div variants={item} className="flex items-center gap-3">
           <span className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">

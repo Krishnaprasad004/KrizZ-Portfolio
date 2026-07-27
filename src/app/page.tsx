@@ -4,8 +4,6 @@ import HeroProfile from "@/components/HeroProfile";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
-import EngineeringSystems from "@/components/EngineeringSystems";
-import TechMarquee from "@/components/TechMarquee";
 import Experience from "@/components/Experience";
 import Certifications from "@/components/Certifications";
 import Education from "@/components/Education";
@@ -20,8 +18,6 @@ export default function Home() {
       <About />
       <Skills />
       <Projects />
-      <EngineeringSystems />
-      <TechMarquee />
       <Experience />
       <Certifications />
       <Education />
