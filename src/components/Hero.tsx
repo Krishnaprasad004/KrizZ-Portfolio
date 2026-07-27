@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
-import StarField from "@/components/StarField";
 
 const container = {
   hidden: {},
@@ -169,16 +168,14 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-[#0a0a0a] px-6 text-center">
-      <StarField />
-
+    <section className="relative z-10 flex min-h-screen w-full flex-col items-center justify-center overflow-hidden px-6 text-center">
       <motion.div
         variants={container}
         initial="hidden"
         animate="show"
         className="relative z-10 flex flex-col items-center"
       >
-        <div className="relative flex h-[420px] w-[420px] items-center justify-center sm:h-[480px] sm:w-[480px]">
+        <div className="relative flex h-[360px] w-[360px] items-center justify-center sm:h-[400px] sm:w-[400px]">
           <RingPath radius={160} />
           <RingPath radius={215} />
 
@@ -211,7 +208,7 @@ export default function Hero() {
 
         <motion.h1
           variants={item}
-          className="font-heading mt-6 text-4xl font-semibold tracking-tight text-white sm:text-5xl md:text-6xl"
+          className="font-heading mt-2 text-4xl font-semibold tracking-tight text-white sm:text-5xl md:text-6xl"
         >
           Krishna Prasad H
         </motion.h1>

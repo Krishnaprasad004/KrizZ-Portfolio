@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { getLenis } from "@/lib/lenis";
+import ConstellationMotif from "@/components/ConstellationMotif";
 
 interface Certification {
   name: string;
@@ -140,7 +141,7 @@ export default function Certifications() {
   return (
     <section
       id="certifications"
-      className="w-full bg-[#0a0a0a] px-6 py-24 sm:py-32"
+      className="relative z-10 w-full px-6 py-24 sm:py-32"
     >
       <motion.div
         variants={container}
@@ -149,12 +150,12 @@ export default function Certifications() {
         viewport={{ once: true, amount: 0.2 }}
         className="mx-auto flex max-w-5xl flex-col gap-10"
       >
-        <motion.span
-          variants={item}
-          className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase"
-        >
-          Certifications
-        </motion.span>
+        <motion.div variants={item} className="flex items-center gap-3">
+          <span className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
+            Certifications
+          </span>
+          <ConstellationMotif className="hidden sm:block" />
+        </motion.div>
 
         <div
           className="relative flex h-[380px] items-center justify-center sm:h-[420px]"

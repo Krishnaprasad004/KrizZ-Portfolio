@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import ConstellationMotif from "@/components/ConstellationMotif";
 
 interface SkillCategory {
   category: string;
@@ -47,7 +48,7 @@ const item = {
 
 export default function Skills() {
   return (
-    <section id="skills" className="w-full bg-[#0a0a0a] px-6 py-24 sm:py-32">
+    <section id="skills" className="relative z-10 w-full px-6 py-24 sm:py-32">
       <motion.div
         variants={container}
         initial="hidden"
@@ -55,12 +56,12 @@ export default function Skills() {
         viewport={{ once: true, amount: 0.2 }}
         className="mx-auto flex max-w-5xl flex-col gap-10"
       >
-        <motion.span
-          variants={item}
-          className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase"
-        >
-          Skills
-        </motion.span>
+        <motion.div variants={item} className="flex items-center gap-3">
+          <span className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
+            Skills
+          </span>
+          <ConstellationMotif className="hidden sm:block" />
+        </motion.div>
 
         <div className="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {SKILL_CATEGORIES.map((group) => (

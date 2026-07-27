@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import ConstellationMotif from "@/components/ConstellationMotif";
 
 const FACTS = [
   { label: "Role", value: "Data Engineer Intern" },
@@ -47,7 +48,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="w-full bg-[#0a0a0a] px-6 py-24 sm:py-32"
+      className="relative z-10 w-full px-6 py-24 sm:py-32"
     >
       <motion.div
         variants={container}
@@ -56,12 +57,12 @@ export default function About() {
         viewport={{ once: true, amount: 0.3 }}
         className="mx-auto flex max-w-3xl flex-col gap-10"
       >
-        <motion.span
-          variants={item}
-          className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase"
-        >
-          About
-        </motion.span>
+        <motion.div variants={item} className="flex items-center gap-3">
+          <span className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
+            About
+          </span>
+          <ConstellationMotif className="hidden sm:block" />
+        </motion.div>
 
         <motion.p
           variants={item}

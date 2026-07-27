@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "motion/react";
+import ConstellationMotif from "@/components/ConstellationMotif";
 
 interface ExperienceEntry {
   role: string;
@@ -127,7 +128,7 @@ export default function Experience() {
   return (
     <section
       id="experience"
-      className="w-full bg-[#0a0a0a] px-6 py-24 sm:py-32"
+      className="relative z-10 w-full px-6 py-24 sm:py-32"
     >
       <motion.div
         variants={container}
@@ -136,12 +137,12 @@ export default function Experience() {
         viewport={{ once: true, amount: 0.3 }}
         className="mx-auto flex max-w-3xl flex-col gap-10"
       >
-        <motion.span
-          variants={item}
-          className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase"
-        >
-          Experience
-        </motion.span>
+        <motion.div variants={item} className="flex items-center gap-3">
+          <span className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
+            Experience
+          </span>
+          <ConstellationMotif className="hidden sm:block" />
+        </motion.div>
 
         <div className="relative flex flex-col gap-8">
           <div className="absolute top-1.5 bottom-1.5 left-[5px] w-px bg-blue-500/20" />

@@ -39,16 +39,17 @@ export default function StarField() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const container = canvas?.parentElement;
-    if (!canvas || !container) return;
+    if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     const setSize = () => {
-      const rect = container.getBoundingClientRect();
-      canvas.width = rect.width;
-      canvas.height = rect.height;
-      starsRef.current = createStars(rect.width, rect.height, 90);
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+      const count = Math.round((width * height) / 9000);
+      starsRef.current = createStars(width, height, count);
     };
     setSize();
     window.addEventListener("resize", setSize);
@@ -77,7 +78,7 @@ export default function StarField() {
     <canvas
       ref={canvasRef}
       aria-hidden
-      className="pointer-events-none absolute inset-0 z-0"
+      className="pointer-events-none fixed inset-0 z-0"
     />
   );
 }

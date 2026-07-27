@@ -3,6 +3,7 @@ import { JetBrains_Mono } from "next/font/google";
 import SmoothScroll from "@/components/SmoothScroll";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 import CommandPaletteProvider from "@/components/CommandPaletteProvider";
+import StarField from "@/components/StarField";
 import "./globals.css";
 
 const jetbrainsMono = JetBrains_Mono({
@@ -33,6 +34,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-body flex min-h-full flex-col bg-[#0a0a0a]">
+        <StarField />
         <ScrollProgressBar />
         <SmoothScroll>
           <CommandPaletteProvider>{children}</CommandPaletteProvider>

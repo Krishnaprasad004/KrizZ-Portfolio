@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import ConstellationMotif from "@/components/ConstellationMotif";
 
 const LINKS = [
   {
@@ -65,7 +66,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="w-full bg-[#0a0a0a] px-6 py-24 text-center sm:py-32"
+      className="relative z-10 w-full px-6 py-24 text-center sm:py-32"
     >
       <motion.div
         variants={container}
@@ -74,12 +75,12 @@ export default function Contact() {
         viewport={{ once: true, amount: 0.3 }}
         className="mx-auto flex max-w-2xl flex-col items-center gap-6"
       >
-        <motion.h2
-          variants={item}
-          className="font-heading text-3xl font-semibold tracking-tight text-white sm:text-4xl"
-        >
-          Let&apos;s Connect
-        </motion.h2>
+        <motion.div variants={item} className="flex items-center justify-center gap-3">
+          <h2 className="font-heading text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            Let&apos;s Connect
+          </h2>
+          <ConstellationMotif className="hidden sm:block" />
+        </motion.div>
 
         <motion.p variants={item} className="text-lg text-zinc-400">
           Have a project in mind or just want to say hi? Reach out — I&apos;d

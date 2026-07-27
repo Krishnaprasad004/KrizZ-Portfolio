@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { projects } from "@/data/projects";
 import ProjectCard from "@/components/ProjectCard";
+import ConstellationMotif from "@/components/ConstellationMotif";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -38,6 +39,7 @@ export default function Projects() {
 
   useEffect(() => {
     const mq = window.matchMedia(DESKTOP_QUERY);
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time sync from matchMedia, unavailable during SSR so can't be computed during render
     setIsDesktop(mq.matches);
     const onChange = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
     mq.addEventListener("change", onChange);
@@ -98,7 +100,7 @@ export default function Projects() {
     <section
       id="projects"
       ref={sectionRef}
-      className="relative z-10 w-full shrink-0 bg-[#0a0a0a] px-6 py-24 sm:py-32 lg:h-screen lg:py-0"
+      className="relative z-10 w-full shrink-0 px-6 py-24 sm:py-32 lg:h-screen lg:py-0"
     >
       <motion.div
         variants={container}
@@ -107,12 +109,12 @@ export default function Projects() {
         viewport={{ once: true, amount: 0.2 }}
         className="mx-auto flex h-full max-w-6xl flex-col gap-10 lg:justify-center"
       >
-        <motion.span
-          variants={item}
-          className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase"
-        >
-          Projects
-        </motion.span>
+        <motion.div variants={item} className="flex items-center gap-3">
+          <span className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
+            Projects
+          </span>
+          <ConstellationMotif className="hidden sm:block" />
+        </motion.div>
 
         {isDesktop ? (
           <div ref={viewportRef} className="overflow-hidden">

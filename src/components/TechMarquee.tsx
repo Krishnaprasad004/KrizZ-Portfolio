@@ -15,7 +15,7 @@ const LOOP_ITEMS = [...TECH_STACK, ...TECH_STACK];
 
 export default function TechMarquee() {
   return (
-    <section className="w-full bg-[#0a0a0a] py-10 sm:hidden">
+    <section className="relative z-10 w-full py-10 sm:hidden">
       <div
         className="relative w-full overflow-hidden"
         style={{

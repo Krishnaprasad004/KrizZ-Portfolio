@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import ConstellationMotif from "@/components/ConstellationMotif";
 
 const container = {
   hidden: {},
@@ -48,7 +49,7 @@ export default function Education() {
   return (
     <section
       id="education"
-      className="w-full bg-[#0a0a0a] px-6 py-24 sm:py-32"
+      className="relative z-10 w-full px-6 py-24 sm:py-32"
     >
       <motion.div
         variants={container}
@@ -57,12 +58,12 @@ export default function Education() {
         viewport={{ once: true, amount: 0.3 }}
         className="mx-auto flex max-w-3xl flex-col gap-10"
       >
-        <motion.span
-          variants={item}
-          className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase"
-        >
-          Education
-        </motion.span>
+        <motion.div variants={item} className="flex items-center gap-3">
+          <span className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
+            Education
+          </span>
+          <ConstellationMotif className="hidden sm:block" />
+        </motion.div>
 
         <motion.div
           variants={item}
