@@ -141,7 +141,7 @@ export default function Certifications() {
   return (
     <section
       id="certifications"
-      className="relative z-10 w-full px-6 py-24 sm:py-32"
+      className="relative z-10 w-full overflow-x-hidden px-6 py-24 sm:py-32"
     >
       <motion.div
         variants={container}

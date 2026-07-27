@@ -192,7 +192,7 @@ export default function HeroProfile() {
   const statsInView = useInView(statRowRef, { once: true, margin: "-40px" });
 
   return (
-    <section className="relative flex min-h-screen w-full items-center overflow-hidden px-6 pt-28 pb-16">
+    <section className="relative z-10 flex w-full items-center overflow-hidden px-6 py-24 sm:py-32">
       <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-16 lg:grid-cols-2">
         <motion.div
           variants={container}
@@ -200,7 +200,7 @@ export default function HeroProfile() {
           animate="show"
           className="relative z-10 flex items-center justify-center"
         >
-          <div className="relative flex h-[560px] w-[560px] max-w-full items-center justify-center">
+          <div className="relative flex h-[560px] w-[560px] max-w-full origin-center scale-[0.62] items-center justify-center sm:scale-100">
             <RingPath radius={165} />
             <RingPath radius={225} />
 
