@@ -24,6 +24,40 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const lastScrollY = useRef(0);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  // Single source of truth for how much clearance every section needs under
+  // the fixed navbar: measure its real rendered bottom edge (not the
+  // hide-on-scroll-animated position — the resting position, since that's
+  // the worst case a scroll-margin needs to clear) and publish it as a CSS
+  // var. globals.css reads --navbar-clearance instead of a hardcoded value,
+  // so it can never drift out of sync with the navbar's actual size.
+  useEffect(() => {
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
+
+    const NAVBAR_BUFFER_PX = 24;
+
+    const updateClearance = () => {
+      const bottom = wrapper.getBoundingClientRect().bottom;
+      document.documentElement.style.setProperty(
+        "--navbar-clearance",
+        `${Math.ceil(bottom + NAVBAR_BUFFER_PX)}px`
+      );
+    };
+
+    updateClearance();
+    document.fonts?.ready?.then(updateClearance);
+
+    const resizeObserver = new ResizeObserver(updateClearance);
+    resizeObserver.observe(wrapper);
+    window.addEventListener("resize", updateClearance);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", updateClearance);
+    };
+  }, []);
 
   const handleNavClick = (
     event: React.MouseEvent<HTMLAnchorElement>,
@@ -71,7 +105,10 @@ export default function Navbar() {
   }, []);
 
   return (
-    <div className="fixed top-4 left-1/2 z-50 w-[94%] max-w-6xl -translate-x-1/2 sm:top-6">
+    <div
+      ref={wrapperRef}
+      className="fixed top-4 left-1/2 z-50 w-[94%] max-w-6xl -translate-x-1/2 sm:top-6"
+    >
       <motion.div
         animate={{ y: hidden ? -120 : 0, opacity: hidden ? 0 : 1 }}
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}

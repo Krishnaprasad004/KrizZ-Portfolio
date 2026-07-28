@@ -22,9 +22,13 @@ body {
 
 /* Single source of truth for anchor-scroll clearance under the fixed navbar.
    Applies to every top-level section with an id (nav target) so new sections
-   can't forget it the way per-file scroll-mt-28 classes did. */
+   can't forget it the way per-file scroll-mt-28 classes did. The value
+   itself comes from --navbar-clearance, which Navbar.tsx measures from the
+   navbar's actual rendered height at runtime — not a guessed constant, so it
+   can't drift out of sync when the navbar or its content changes. 7rem is
+   only a pre-JS/SSR fallback for the first paint. */
 section[id] {
-  scroll-margin-top: 7rem;
+  scroll-margin-top: var(--navbar-clearance, 7rem);
 }
 
 /* Single source of truth for vertical rhythm between top-level sections
