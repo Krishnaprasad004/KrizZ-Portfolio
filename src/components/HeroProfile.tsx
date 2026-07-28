@@ -193,7 +193,7 @@ export default function HeroProfile() {
 
   return (
     <section className="section-pad relative z-10 flex w-full items-center overflow-hidden">
-      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-16 lg:grid-cols-2">
+      <div className="section-container grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
         <motion.div
           variants={container}
           initial="hidden"

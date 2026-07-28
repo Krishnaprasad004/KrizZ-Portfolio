@@ -49,7 +49,7 @@ export default function About() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.3 }}
-        className="mx-auto flex max-w-5xl flex-col gap-10"
+        className="section-container flex flex-col gap-10"
       >
         <motion.div variants={item} className="flex items-center gap-3">
           <span className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">

@@ -142,7 +142,7 @@ export default function Experience() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.3 }}
-        className="relative z-10 mx-auto flex max-w-3xl flex-col gap-10"
+        className="section-container relative z-10 flex flex-col gap-10"
       >
         <motion.div variants={item} className="flex items-center gap-3">
           <span className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
@@ -151,7 +151,7 @@ export default function Experience() {
           <ConstellationMotif className="hidden sm:block" />
         </motion.div>
 
-        <div className="relative flex flex-col gap-8">
+        <div className="relative flex max-w-3xl flex-col gap-8">
           <div className="absolute top-1.5 bottom-1.5 left-[5px] w-px bg-blue-500/20" />
 
           {EXPERIENCE.map((exp) => (

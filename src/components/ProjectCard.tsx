@@ -77,7 +77,7 @@ export default function ProjectCard({ project }: { project: Project }) {
         />
 
         <div className="flex flex-1 flex-col p-6">
-          <span className="font-mono text-[11px] tracking-wide text-blue-400 uppercase">
+          <span className="block pb-2 font-mono text-[11px] tracking-wide text-blue-400 uppercase">
             {project.tags.join(", ")}
           </span>
 

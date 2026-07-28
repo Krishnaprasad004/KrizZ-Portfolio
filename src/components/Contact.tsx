@@ -91,12 +91,13 @@ export default function Contact() {
         HIRE
       </span>
 
+      <div className="section-container relative z-10">
       <motion.div
         variants={container}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.3 }}
-        className="relative z-10 mx-auto flex max-w-2xl flex-col items-center gap-6"
+        className="mx-auto flex max-w-2xl flex-col items-center gap-6"
       >
         <motion.div variants={item} className="flex items-center gap-3">
           <span className="rounded-full border border-blue-500/40 bg-blue-500/10 px-4 py-1.5 font-mono text-xs font-medium tracking-widest text-blue-300 uppercase backdrop-blur-md">
@@ -174,6 +175,7 @@ export default function Contact() {
           </p>
         </motion.div>
       </motion.div>
+      </div>
     </section>
   );
 }
