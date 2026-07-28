@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "motion/react";
 import { getLenis } from "@/lib/lenis";
 import ConstellationMotif from "@/components/ConstellationMotif";
@@ -104,15 +105,14 @@ function CloseIcon() {
   );
 }
 
-const CARD_SPACING = 300;
-const SIDE_TILT_DEG = 30;
-const CARD_WIDTH = 260;
-const CARD_HEIGHT = 236;
-
 export default function Certifications() {
-  const [active, setActive] = useState(0);
   const [openCert, setOpenCert] = useState<Certification | null>(null);
-  const total = CERTIFICATIONS.length;
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- portal target (document.body) only exists client-side, so this can't be computed during render
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!openCert) return;
@@ -133,17 +133,10 @@ export default function Certifications() {
     };
   }, [openCert]);
 
-  const getOffset = (index: number) => {
-    let offset = index - active;
-    if (offset > total / 2) offset -= total;
-    if (offset < -total / 2) offset += total;
-    return offset;
-  };
-
   return (
     <section
       id="certifications"
-      className="section-pad relative z-10 w-full overflow-hidden"
+      className="section-pad relative z-10 w-full"
     >
       <motion.div
         variants={container}
@@ -159,88 +152,14 @@ export default function Certifications() {
           <ConstellationMotif className="hidden sm:block" />
         </motion.div>
 
-        {/* Desktop/tablet: 3D coverflow */}
-        <div
-          className="relative hidden h-[260px] items-center justify-center overflow-hidden sm:flex"
-          style={{ perspective: 1200 }}
-        >
-          <div className="relative h-0 w-0">
-            {CERTIFICATIONS.map((cert, index) => {
-              const offset = getOffset(index);
-              const isActive = offset === 0;
-              const absOffset = Math.abs(offset);
-
-              return (
-                <motion.button
-                  key={`${cert.issuer}-${cert.name}`}
-                  type="button"
-                  onClick={() => (isActive ? setOpenCert(cert) : setActive(index))}
-                  animate={{
-                    x: offset * CARD_SPACING - CARD_WIDTH / 2,
-                    y: -CARD_HEIGHT / 2,
-                    z: isActive ? 50 : -100,
-                    rotateY: isActive ? 0 : -SIDE_TILT_DEG * absOffset,
-                    scale: isActive ? 1 : 0.82,
-                    opacity: absOffset > 1 ? 0 : isActive ? 1 : 0.55,
-                  }}
-                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                  style={{
-                    zIndex: total - absOffset,
-                    height: CARD_HEIGHT,
-                    ...(isActive
-                      ? ({
-                          WebkitBoxReflect:
-                            "below 6px linear-gradient(to bottom, transparent, transparent, rgba(255,255,255,0.08))",
-                        } as React.CSSProperties)
-                      : {}),
-                  }}
-                  className="absolute top-0 left-0 w-[260px] cursor-pointer rounded-2xl border border-white/10 bg-white/[0.02] p-6 text-left transition-colors duration-300 hover:border-blue-500/50"
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full border border-blue-500/30 bg-blue-500/10">
-                    <BadgeIcon />
-                  </div>
-
-                  <h3 className="font-heading mt-4 text-base font-semibold tracking-tight text-white">
-                    {cert.name}
-                  </h3>
-                  <p className="mt-2 font-mono text-sm text-zinc-400">
-                    {cert.issuer} · {cert.year}
-                  </p>
-
-                  {isActive && (
-                    <span className="mt-4 flex items-center gap-1.5 text-xs font-medium text-blue-400">
-                      <ViewIcon />
-                      View Certificate
-                    </span>
-                  )}
-                </motion.button>
-              );
-            })}
-          </div>
-        </div>
-
-        <div className="hidden items-center justify-center gap-2 sm:flex">
-          {CERTIFICATIONS.map((cert, index) => (
-            <button
-              key={cert.name}
-              type="button"
-              onClick={() => setActive(index)}
-              aria-label={`Show ${cert.name}`}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                index === active ? "w-6 bg-blue-400" : "w-2 bg-white/20 hover:bg-white/40"
-              }`}
-            />
-          ))}
-        </div>
-
-        {/* Mobile: plain stacked list, no 3D transforms */}
-        <div className="flex flex-col gap-4 sm:hidden">
+        <div className="grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {CERTIFICATIONS.map((cert) => (
-            <button
-              key={`${cert.issuer}-${cert.name}-mobile`}
+            <motion.button
+              key={`${cert.issuer}-${cert.name}`}
+              variants={item}
               type="button"
               onClick={() => setOpenCert(cert)}
-              className="flex items-start gap-4 rounded-2xl border border-white/10 bg-white/5 p-6 text-left backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50"
+              className="flex h-full flex-col items-start gap-4 rounded-2xl border border-white/10 bg-white/5 p-6 text-left backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50"
             >
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-blue-500/30 bg-blue-500/10">
                 <BadgeIcon />
@@ -258,48 +177,52 @@ export default function Certifications() {
                   View Certificate
                 </span>
               </div>
-            </button>
+            </motion.button>
           ))}
         </div>
       </motion.div>
 
-      <AnimatePresence>
-        {openCert && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            onClick={() => setOpenCert(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-6 backdrop-blur-sm"
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative max-h-[90vh] max-w-[90vw]"
-            >
-              <button
-                type="button"
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {openCert && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
                 onClick={() => setOpenCert(null)}
-                aria-label="Close"
-                className="absolute -top-4 -right-4 flex h-9 w-9 items-center justify-center rounded-full border border-blue-500/60 bg-[#0a0a0a] text-white shadow-[0_0_12px_rgba(59,130,246,0.5)] transition-shadow duration-300 hover:shadow-[0_0_24px_rgba(59,130,246,0.8)]"
+                className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 p-6 backdrop-blur-sm"
               >
-                <CloseIcon />
-              </button>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                  onClick={(e) => e.stopPropagation()}
+                  className="relative max-h-[90vh] max-w-[90vw]"
+                >
+                  <button
+                    type="button"
+                    onClick={() => setOpenCert(null)}
+                    aria-label="Close"
+                    className="absolute -top-4 -right-4 flex h-9 w-9 items-center justify-center rounded-full border border-blue-500/60 bg-[#0a0a0a] text-white shadow-[0_0_12px_rgba(59,130,246,0.5)] transition-shadow duration-300 hover:shadow-[0_0_24px_rgba(59,130,246,0.8)]"
+                  >
+                    <CloseIcon />
+                  </button>
 
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={openCert.image}
-                alt={openCert.name}
-                className="max-h-[90vh] max-w-[90vw] rounded-lg border border-white/10 object-contain"
-              />
-            </motion.div>
-          </motion.div>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={openCert.image}
+                    alt={openCert.name}
+                    className="max-h-[90vh] max-w-[90vw] rounded-lg border border-white/10 object-contain"
+                  />
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
     </section>
   );
 }
