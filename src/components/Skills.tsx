@@ -296,8 +296,8 @@ export default function Skills() {
           ))}
         </div>
 
-        <motion.div variants={item} className="mt-6">
-          <span className="font-mono text-xs font-medium tracking-widest text-blue-400 uppercase">
+        <motion.div variants={item} className="mt-14">
+          <span className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
             Core Technologies
           </span>
 
