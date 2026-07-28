@@ -40,13 +40,13 @@ export default function ProjectCard({ project }: { project: Project }) {
       {/* 1. Cover image — rounded top corners come from the card's own
           overflow-hidden clipping this flush-edge image. */}
       <div
-        className="aspect-video w-full shrink-0 bg-cover bg-center bg-no-repeat"
+        className="aspect-[3/1] w-full shrink-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: project.coverImage }}
       />
 
-      <div className="flex flex-1 flex-col p-6">
+      <div className="flex flex-1 flex-col p-4">
         {/* 2. Tech-tag line */}
-        <span className="block pb-6 font-mono text-[11px] tracking-wide text-blue-400 uppercase">
+        <span className="block pb-4 font-mono text-[11px] tracking-wide text-blue-400 uppercase">
           {project.tags.join(", ")}
         </span>
 
@@ -61,12 +61,12 @@ export default function ProjectCard({ project }: { project: Project }) {
         </p>
 
         {/* 5. Description — clamped to 2 lines so every card stays the same height */}
-        <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-zinc-400">
+        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-zinc-400">
           {project.description}
         </p>
 
         {/* 6. Pill tags */}
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="mt-3 flex flex-wrap gap-2">
           {visibleTags.map((tag) => (
             <span
               key={tag}
@@ -83,8 +83,8 @@ export default function ProjectCard({ project }: { project: Project }) {
         </div>
 
         {/* 7. View Details CTA */}
-        <div className="mt-auto pt-5">
-          <div className="flex w-full items-center justify-center gap-2 rounded-full border border-blue-500/60 bg-blue-500/10 px-5 py-2.5 text-sm font-medium text-white transition-colors duration-300 group-hover:bg-blue-500/20 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]">
+        <div className="mt-auto pt-4">
+          <div className="flex w-full items-center justify-center gap-2 rounded-full border border-blue-500/60 bg-blue-500/10 px-5 py-2 text-sm font-medium text-white transition-colors duration-300 group-hover:bg-blue-500/20 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]">
             View Details
             <ArrowIcon />
           </div>
