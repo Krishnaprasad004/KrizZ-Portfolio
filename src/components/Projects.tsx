@@ -117,7 +117,7 @@ export default function Projects() {
         </motion.div>
 
         {isDesktop ? (
-          <div ref={viewportRef} className="overflow-hidden">
+          <div ref={viewportRef} className="shrink-0 overflow-hidden">
             <div
               ref={trackRef}
               className="flex gap-6"
