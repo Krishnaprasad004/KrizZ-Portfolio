@@ -143,7 +143,7 @@ export default function Certifications() {
   return (
     <section
       id="certifications"
-      className="relative z-10 w-full overflow-hidden px-6 py-24 sm:py-32"
+      className="section-pad relative z-10 w-full overflow-hidden"
     >
       <motion.div
         variants={container}
@@ -161,7 +161,7 @@ export default function Certifications() {
 
         {/* Desktop/tablet: 3D coverflow */}
         <div
-          className="relative hidden h-[300px] items-center justify-center overflow-hidden sm:flex"
+          className="relative hidden h-[260px] items-center justify-center overflow-hidden sm:flex"
           style={{ perspective: 1200 }}
         >
           <div className="relative h-0 w-0">

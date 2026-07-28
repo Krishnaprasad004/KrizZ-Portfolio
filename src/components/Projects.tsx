@@ -100,14 +100,14 @@ export default function Projects() {
     <section
       id="projects"
       ref={sectionRef}
-      className="relative z-10 w-full shrink-0 px-6 py-24 sm:py-32 lg:h-screen lg:py-0"
+      className="section-pad relative z-10 w-full shrink-0 lg:h-screen"
     >
       <motion.div
         variants={container}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.2 }}
-        className="mx-auto flex h-full max-w-6xl flex-col gap-10 lg:justify-center"
+        className="mx-auto flex h-full max-w-6xl flex-col gap-10"
       >
         <motion.div variants={item} className="flex items-center gap-3">
           <span className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">

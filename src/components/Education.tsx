@@ -47,10 +47,7 @@ function CapIcon() {
 
 export default function Education() {
   return (
-    <section
-      id="education"
-      className="relative z-10 w-full px-6 py-24 sm:py-32"
-    >
+    <section id="education" className="section-pad relative z-10 w-full">
       <motion.div
         variants={container}
         initial="hidden"

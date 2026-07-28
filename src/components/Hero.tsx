@@ -122,7 +122,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden px-6 py-24 text-center">
+    <section className="section-pad relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden text-center">
       <motion.div
         variants={container}
         initial="hidden"

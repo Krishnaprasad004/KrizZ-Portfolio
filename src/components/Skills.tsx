@@ -246,7 +246,7 @@ const item = {
 
 export default function Skills() {
   return (
-    <section id="skills" className="relative z-10 w-full px-6 py-24 sm:py-32">
+    <section id="skills" className="section-pad relative z-10 w-full">
       <motion.div
         variants={container}
         initial="hidden"

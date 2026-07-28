@@ -192,7 +192,7 @@ export default function HeroProfile() {
   const statsInView = useInView(statRowRef, { once: true, margin: "-40px" });
 
   return (
-    <section className="relative z-10 flex w-full items-center overflow-hidden px-6 py-24 sm:py-32">
+    <section className="section-pad relative z-10 flex w-full items-center overflow-hidden">
       <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-16 lg:grid-cols-2">
         <motion.div
           variants={container}
