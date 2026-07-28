@@ -128,7 +128,7 @@ export default function Hero() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.3 }}
-        className="section-container relative z-10 flex flex-col items-center"
+        className="relative z-10 flex flex-col items-center"
       >
         <motion.span
           variants={item}

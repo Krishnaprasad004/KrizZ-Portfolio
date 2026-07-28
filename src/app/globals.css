@@ -35,14 +35,6 @@ section[id] {
   @apply px-6 py-24 sm:py-32;
 }
 
-/* Single source of truth for section content width — every section's inner
-   wrapper uses this instead of its own mx-auto max-w-*, so every section's
-   centered box is the same width and their left edges land on the same
-   vertical line down the page. */
-.section-container {
-  @apply mx-auto w-full max-w-7xl;
-}
-
 @keyframes spin-cw {
   to {
     transform: rotate(360deg);
