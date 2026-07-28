@@ -20,6 +20,13 @@ body {
   color: var(--foreground);
 }
 
+/* Single source of truth for anchor-scroll clearance under the fixed navbar.
+   Applies to every top-level section with an id (nav target) so new sections
+   can't forget it the way per-file scroll-mt-28 classes did. */
+section[id] {
+  scroll-margin-top: 7rem;
+}
+
 @keyframes spin-cw {
   to {
     transform: rotate(360deg);

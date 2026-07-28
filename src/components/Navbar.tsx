@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { getLenis } from "@/lib/lenis";
+import { getLenis, markProgrammaticScroll, isProgrammaticScroll } from "@/lib/lenis";
 import CommandPaletteTrigger from "@/components/CommandPaletteTrigger";
 
 const NAV_LINKS = [
@@ -22,6 +22,8 @@ const underline = {
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const lastScrollY = useRef(0);
 
   const handleNavClick = (
     event: React.MouseEvent<HTMLAnchorElement>,
@@ -30,11 +32,51 @@ export default function Navbar() {
     const lenis = getLenis();
     if (!lenis) return;
     event.preventDefault();
+    markProgrammaticScroll();
+    setHidden(false);
     lenis.scrollTo(href);
   };
 
+  // Hide the floating navbar while the user scrolls down through content
+  // (it would otherwise sit on top of and visually slice whatever passes
+  // underneath it), and reveal it again on scroll-up or near the page top.
+  useEffect(() => {
+    lastScrollY.current = window.scrollY;
+    let ticking = false;
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const currentY = window.scrollY;
+        const delta = currentY - lastScrollY.current;
+
+        if (!isProgrammaticScroll()) {
+          if (currentY < 96) {
+            setHidden(false);
+          } else if (delta > 4) {
+            setHidden(true);
+          } else if (delta < -4) {
+            setHidden(false);
+          }
+        }
+
+        lastScrollY.current = currentY;
+        ticking = false;
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <div className="fixed top-4 left-1/2 z-50 w-[94%] max-w-6xl -translate-x-1/2 sm:top-6">
+      <motion.div
+        animate={{ y: hidden ? -120 : 0, opacity: hidden ? 0 : 1 }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+        style={{ pointerEvents: hidden ? "none" : "auto" }}
+      >
       <nav className="rounded-full border border-white/10 bg-black/40 shadow-[0_8px_30px_rgba(0,0,0,0.4)] backdrop-blur-xl">
         <div className="flex items-center gap-4 px-5 py-2.5 sm:px-7 sm:py-3">
           <div className="flex flex-1 flex-col leading-tight">
@@ -74,7 +116,10 @@ export default function Navbar() {
 
             <button
               type="button"
-              onClick={() => setMobileOpen((open) => !open)}
+              onClick={() => {
+                setMobileOpen((open) => !open);
+                setHidden(false);
+              }}
               aria-label="Toggle navigation menu"
               aria-expanded={mobileOpen}
               className="relative flex h-8 w-8 flex-col items-center justify-center gap-1.5 lg:hidden"
@@ -122,6 +167,7 @@ export default function Navbar() {
           )}
         </AnimatePresence>
       </nav>
+      </motion.div>
     </div>
   );
 }

@@ -100,7 +100,7 @@ export default function Projects() {
     <section
       id="projects"
       ref={sectionRef}
-      className="relative z-10 w-full scroll-mt-28 shrink-0 px-6 py-24 sm:py-32 lg:h-screen lg:py-0"
+      className="relative z-10 w-full shrink-0 px-6 py-24 sm:py-32 lg:h-screen lg:py-0"
     >
       <motion.div
         variants={container}

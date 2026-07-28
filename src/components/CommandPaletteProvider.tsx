@@ -10,7 +10,7 @@ import {
 import { useRouter, usePathname } from "next/navigation";
 import { Command } from "cmdk";
 import { AnimatePresence, motion } from "motion/react";
-import { getLenis } from "@/lib/lenis";
+import { getLenis, markProgrammaticScroll } from "@/lib/lenis";
 import { projects } from "@/data/projects";
 
 const SECTIONS = [
@@ -89,6 +89,7 @@ export default function CommandPaletteProvider({
     if (pathname === "/") {
       const lenis = getLenis();
       if (lenis) {
+        markProgrammaticScroll();
         lenis.scrollTo(`#${id}`);
         return;
       }

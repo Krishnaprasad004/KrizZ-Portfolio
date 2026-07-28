@@ -82,7 +82,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative z-10 w-full scroll-mt-28 overflow-hidden px-6 py-24 text-center sm:py-32"
+      className="relative z-10 w-full overflow-hidden px-6 py-24 text-center sm:py-32"
     >
       <span
         aria-hidden
