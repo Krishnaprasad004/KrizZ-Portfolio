@@ -77,7 +77,7 @@ export default function Navbar() {
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         style={{ pointerEvents: hidden ? "none" : "auto" }}
       >
-      <nav className="rounded-full border border-white/10 bg-black/40 shadow-[0_8px_30px_rgba(0,0,0,0.4)] backdrop-blur-xl">
+      <nav className="rounded-full border border-white/10 bg-black/85 shadow-[0_8px_30px_rgba(0,0,0,0.4)] backdrop-blur-xl">
         <div className="flex items-center gap-4 px-5 py-2.5 sm:px-7 sm:py-3">
           <div className="flex flex-1 flex-col leading-tight">
             <span className="text-sm font-semibold tracking-widest text-white">
