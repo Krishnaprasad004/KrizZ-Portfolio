@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "motion/react";
 import { getLenis } from "@/lib/lenis";
 import ConstellationMotif from "@/components/ConstellationMotif";
+import ScrambleText from "@/components/ScrambleText";
 
 interface Certification {
   name: string;
@@ -147,7 +148,7 @@ export default function Certifications() {
       >
         <motion.div variants={item} className="flex items-center gap-3">
           <span className="hud-eyebrow font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
-            Certifications
+            <ScrambleText text="Certifications" />
           </span>
           <ConstellationMotif className="hidden sm:block" />
         </motion.div>

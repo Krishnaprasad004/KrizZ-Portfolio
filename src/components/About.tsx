@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import ConstellationMotif from "@/components/ConstellationMotif";
+import ScrambleText from "@/components/ScrambleText";
 
 const FACTS = [
   { label: "Role", value: "Data Engineer Intern" },
@@ -53,7 +54,7 @@ export default function About() {
       >
         <motion.div variants={item} className="flex items-center gap-3">
           <span className="hud-eyebrow font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
-            About
+            <ScrambleText text="About" />
           </span>
           <ConstellationMotif className="hidden sm:block" />
         </motion.div>

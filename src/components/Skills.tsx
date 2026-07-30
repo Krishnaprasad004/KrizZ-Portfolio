@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import ConstellationMotif from "@/components/ConstellationMotif";
+import ScrambleText from "@/components/ScrambleText";
 
 interface PipelineStep {
   label: string;
@@ -264,7 +265,7 @@ export default function Skills() {
       >
         <motion.div variants={item} className="flex items-center gap-3">
           <span className="hud-eyebrow font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
-            Skills
+            <ScrambleText text="Skills" />
           </span>
           <ConstellationMotif className="hidden sm:block" />
         </motion.div>
@@ -306,7 +307,7 @@ export default function Skills() {
 
         <motion.div variants={item} className="mt-24">
           <span className="hud-eyebrow font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
-            Core Technologies
+            <ScrambleText text="Core Technologies" />
           </span>
 
           <div className="mt-4 hidden flex-wrap items-center gap-x-2 gap-y-3 sm:flex">

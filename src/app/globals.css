@@ -97,6 +97,27 @@ section[id] {
   opacity: 1;
 }
 
+/* Cursor-tracked light source. HudSpotlight.tsx feeds --spot-x/--spot-y;
+   the gradient falls back to the card's centre before any pointer moves. */
+.hud-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 350ms ease;
+  background: radial-gradient(
+    240px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+    rgba(62, 166, 255, 0.13),
+    transparent 68%
+  );
+}
+
+.hud-frame:hover::after {
+  opacity: 1;
+}
+
 /* Blinking status tick before a section's eyebrow label, echoing the
    "live readout" feel of the orbit badges. */
 .hud-eyebrow::before {

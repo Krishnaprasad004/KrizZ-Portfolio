@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import ConstellationMotif from "@/components/ConstellationMotif";
+import ScrambleText from "@/components/ScrambleText";
 
 interface ExperienceEntry {
   role: string;
@@ -146,7 +147,7 @@ export default function Experience() {
       >
         <motion.div variants={item} className="flex items-center gap-3">
           <span className="hud-eyebrow font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
-            Experience
+            <ScrambleText text="Experience" />
           </span>
           <ConstellationMotif className="hidden sm:block" />
         </motion.div>

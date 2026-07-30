@@ -4,6 +4,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 import CommandPaletteProvider from "@/components/CommandPaletteProvider";
 import FaceBackground from "@/components/FaceBackground";
+import HudSpotlight from "@/components/HudSpotlight";
 import "./globals.css";
 
 const jetbrainsMono = JetBrains_Mono({
@@ -41,6 +42,7 @@ export default function RootLayout({
       </head>
       <body className="font-body flex min-h-full flex-col bg-[#0a0a0a]">
         <FaceBackground />
+        <HudSpotlight />
         <ScrollProgressBar />
         <SmoothScroll>
           <CommandPaletteProvider>{children}</CommandPaletteProvider>

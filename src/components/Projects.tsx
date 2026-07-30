@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { projects } from "@/data/projects";
 import ProjectCard from "@/components/ProjectCard";
 import ConstellationMotif from "@/components/ConstellationMotif";
+import ScrambleText from "@/components/ScrambleText";
 
 const container = {
   hidden: {},
@@ -36,7 +37,7 @@ export default function Projects() {
       >
         <motion.div variants={item} className="flex items-center gap-3">
           <span className="hud-eyebrow font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
-            Projects
+            <ScrambleText text="Projects" />
           </span>
           <ConstellationMotif className="hidden sm:block" />
         </motion.div>

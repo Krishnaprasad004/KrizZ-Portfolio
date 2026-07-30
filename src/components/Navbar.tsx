@@ -23,8 +23,33 @@ const underline = {
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const [activeId, setActiveId] = useState("");
   const lastScrollY = useRef(0);
   const wrapperRef = useRef<HTMLDivElement>(null);
+
+  // Scroll-spy: highlights whichever section currently owns the middle of the
+  // viewport. The rootMargin band keeps exactly one section "active" at a time
+  // instead of flickering between two during the handover.
+  useEffect(() => {
+    const sections = NAV_LINKS.map((link) =>
+      document.getElementById(link.href.slice(1))
+    ).filter((el): el is HTMLElement => el !== null);
+
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const winner = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (winner) setActiveId(winner.target.id);
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: [0, 0.5, 1] }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
 
   // Single source of truth for how much clearance every section needs under
   // the fixed navbar: measure its real rendered bottom edge (not the
@@ -126,26 +151,36 @@ export default function Navbar() {
           </div>
 
           <ul className="hidden items-center gap-6 lg:flex">
-            {NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <motion.a
-                  href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  initial="rest"
-                  animate="rest"
-                  whileHover="hover"
-                  className="relative text-sm font-medium text-zinc-300 transition-colors duration-200 hover:text-white"
-                >
-                  {link.label}
-                  <motion.span
-                    variants={underline}
-                    transition={{ duration: 0.25, ease: "easeOut" }}
-                    style={{ originX: 0 }}
-                    className="absolute -bottom-1 left-0 h-px w-full bg-blue-400"
-                  />
-                </motion.a>
-              </li>
-            ))}
+            {NAV_LINKS.map((link) => {
+              const isActive = activeId === link.href.slice(1);
+              return (
+                <li key={link.href}>
+                  <motion.a
+                    href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    aria-current={isActive ? "true" : undefined}
+                    initial="rest"
+                    animate={isActive ? "hover" : "rest"}
+                    whileHover="hover"
+                    className={`relative text-sm font-medium transition-colors duration-200 hover:text-white ${
+                      isActive
+                        ? "text-white [text-shadow:0_0_12px_rgba(62,166,255,0.65)]"
+                        : "text-zinc-300"
+                    }`}
+                  >
+                    {link.label}
+                    <motion.span
+                      variants={underline}
+                      transition={{ duration: 0.25, ease: "easeOut" }}
+                      style={{ originX: 0 }}
+                      className={`absolute -bottom-1 left-0 h-px w-full bg-blue-400 ${
+                        isActive ? "shadow-[0_0_8px_rgba(62,166,255,0.9)]" : ""
+                      }`}
+                    />
+                  </motion.a>
+                </li>
+              );
+            })}
           </ul>
 
           <div className="flex flex-1 items-center justify-end gap-2">
