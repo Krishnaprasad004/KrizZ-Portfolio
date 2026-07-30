@@ -56,7 +56,7 @@ export default function Education() {
         className="mx-auto flex max-w-5xl flex-col gap-10"
       >
         <motion.div variants={item} className="flex items-center gap-3">
-          <span className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
+          <span className="hud-eyebrow font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
             Education
           </span>
           <ConstellationMotif className="hidden sm:block" />
@@ -64,7 +64,7 @@ export default function Education() {
 
         <motion.div
           variants={item}
-          className="flex max-w-3xl items-start gap-4 rounded-2xl border border-white/10 border-l-4 border-l-blue-500 bg-white/5 p-6 backdrop-blur-md transition-colors duration-300 hover:border-l-blue-400 hover:shadow-[0_0_30px_rgba(59,130,246,0.25)]"
+          className="hud-frame flex max-w-3xl items-start gap-4 rounded-2xl border border-white/10 border-l-4 border-l-blue-500 bg-white/5 p-6 backdrop-blur-md transition-colors duration-300 hover:border-l-blue-400 hover:shadow-[0_0_30px_rgba(59,130,246,0.25)]"
         >
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-blue-500/30 bg-blue-500/10">
             <CapIcon />

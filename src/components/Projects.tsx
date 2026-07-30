@@ -35,7 +35,7 @@ export default function Projects() {
         className="mx-auto flex max-w-5xl flex-col gap-10"
       >
         <motion.div variants={item} className="flex items-center gap-3">
-          <span className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
+          <span className="hud-eyebrow font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
             Projects
           </span>
           <ConstellationMotif className="hidden sm:block" />

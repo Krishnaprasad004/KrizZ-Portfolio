@@ -255,7 +255,7 @@ export default function Skills() {
         className="mx-auto flex max-w-5xl flex-col gap-10"
       >
         <motion.div variants={item} className="flex items-center gap-3">
-          <span className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
+          <span className="hud-eyebrow font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
             Skills
           </span>
           <ConstellationMotif className="hidden sm:block" />
@@ -264,7 +264,7 @@ export default function Skills() {
         <div className="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-3">
           {PILLARS.map((pillar) => (
             <motion.div key={pillar.title} variants={item} className="h-full">
-              <div className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.25)]">
+              <div className="hud-frame flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.25)]">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full border border-blue-500/30 bg-blue-500/10">
                   {pillar.icon}
                 </div>
@@ -297,7 +297,7 @@ export default function Skills() {
         </div>
 
         <motion.div variants={item} className="mt-40">
-          <span className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
+          <span className="hud-eyebrow font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
             Core Technologies
           </span>
 

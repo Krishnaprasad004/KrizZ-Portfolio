@@ -146,7 +146,7 @@ export default function Certifications() {
         className="mx-auto flex max-w-5xl flex-col gap-10"
       >
         <motion.div variants={item} className="flex items-center gap-3">
-          <span className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
+          <span className="hud-eyebrow font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
             Certifications
           </span>
           <ConstellationMotif className="hidden sm:block" />
@@ -159,7 +159,7 @@ export default function Certifications() {
               variants={item}
               type="button"
               onClick={() => setOpenCert(cert)}
-              className="flex h-full flex-col items-start gap-4 rounded-2xl border border-white/10 bg-white/5 p-6 text-left backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50"
+              className="hud-frame flex h-full flex-col items-start gap-4 rounded-2xl border border-white/10 bg-white/5 p-6 text-left backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50"
             >
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-blue-500/30 bg-blue-500/10">
                 <BadgeIcon />

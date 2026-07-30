@@ -52,7 +52,7 @@ export default function About() {
         className="mx-auto flex max-w-5xl flex-col gap-10"
       >
         <motion.div variants={item} className="flex items-center gap-3">
-          <span className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
+          <span className="hud-eyebrow font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
             About
           </span>
           <ConstellationMotif className="hidden sm:block" />
@@ -102,7 +102,7 @@ export default function About() {
 
           <motion.div variants={item} className="flex flex-col gap-6">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50">
+              <div className="hud-frame rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50">
                 <h3 className="font-heading text-base font-semibold tracking-tight text-white">
                   End-to-End Systems
                 </h3>
@@ -112,7 +112,7 @@ export default function About() {
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50">
+              <div className="hud-frame rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50">
                 <h3 className="font-heading text-base font-semibold tracking-tight text-white">
                   Real-World Solutions
                 </h3>
