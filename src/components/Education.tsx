@@ -1,8 +1,34 @@
 "use client";
 
-import { motion } from "motion/react";
+import { useEffect, useRef, useState } from "react";
+import { motion, animate, useInView } from "motion/react";
 import ConstellationMotif from "@/components/ConstellationMotif";
 import ScrambleText from "@/components/ScrambleText";
+
+const GPA = 7.8;
+
+/** Counts the GPA up from zero the first time the card scrolls into view. */
+function GpaCounter() {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-40px" });
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    const controls = animate(0, GPA, {
+      duration: 1.1,
+      ease: [0.22, 1, 0.36, 1],
+      onUpdate: (v) => setDisplay(v),
+    });
+    return () => controls.stop();
+  }, [inView]);
+
+  return (
+    <span ref={ref} className="tabular-nums">
+      {display.toFixed(2)}
+    </span>
+  );
+}
 
 const container = {
   hidden: {},
@@ -76,20 +102,29 @@ export default function Education() {
               <h3 className="font-heading text-xl font-semibold tracking-tight text-white sm:text-2xl">
                 B.E. Computer Science Engineering
               </h3>
+              <p className="mt-1.5 text-base text-blue-300">
+                Easwari Engineering College
+              </p>
               <p className="mt-2 font-mono text-sm text-zinc-400">
                 Graduated March 2025
               </p>
             </div>
           </div>
 
-          {/* Splits the existing "Graduated March 2025" line into a labelled
-              readout so the card fills its width instead of trailing off. */}
-          <dl className="flex shrink-0 gap-10 border-t border-white/10 pt-5 sm:border-t-0 sm:border-l sm:pt-0 sm:pl-10">
+          <dl className="flex shrink-0 items-start gap-8 border-t border-white/10 pt-5 sm:gap-10 sm:border-t-0 sm:border-l sm:pt-0 sm:pl-10">
+            <div>
+              <dt className="font-mono text-[10px] tracking-widest text-zinc-500 uppercase">
+                GPA
+              </dt>
+              <dd className="font-heading mt-1.5 text-2xl font-semibold text-amber-400">
+                <GpaCounter />
+              </dd>
+            </div>
             <div>
               <dt className="font-mono text-[10px] tracking-widest text-zinc-500 uppercase">
                 Status
               </dt>
-              <dd className="mt-1.5 font-mono text-sm text-blue-300">
+              <dd className="mt-2.5 font-mono text-sm text-blue-300">
                 Graduated
               </dd>
             </div>
@@ -97,7 +132,7 @@ export default function Education() {
               <dt className="font-mono text-[10px] tracking-widest text-zinc-500 uppercase">
                 Year
               </dt>
-              <dd className="mt-1.5 font-mono text-sm text-blue-300">2025</dd>
+              <dd className="mt-2.5 font-mono text-sm text-blue-300">2025</dd>
             </div>
           </dl>
         </motion.div>
