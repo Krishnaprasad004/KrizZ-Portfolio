@@ -131,13 +131,6 @@ export default function Experience() {
       id="experience"
       className="section-pad relative z-10 w-full overflow-hidden"
     >
-      <span
-        aria-hidden
-        className="font-heading pointer-events-none absolute top-1/2 left-1/2 z-0 -translate-x-1/2 -translate-y-1/2 text-[220px] leading-none font-bold text-white/[0.03] select-none sm:text-[320px]"
-      >
-        04
-      </span>
-
       <motion.div
         variants={container}
         initial="hidden"
