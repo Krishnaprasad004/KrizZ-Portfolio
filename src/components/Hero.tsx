@@ -144,7 +144,7 @@ export default function Hero() {
           Krishna Prasad H
         </motion.h2>
 
-        <motion.div variants={item} className="mt-4">
+        <motion.div variants={item} className="mt-8 sm:mt-10">
           <RotatingRole />
         </motion.div>
 
