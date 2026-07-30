@@ -65,20 +65,41 @@ export default function Education() {
 
         <motion.div
           variants={item}
-          className="hud-frame flex max-w-3xl items-start gap-4 rounded-2xl border border-white/10 border-l-4 border-l-blue-500 bg-white/5 p-6 backdrop-blur-md transition-colors duration-300 hover:border-l-blue-400 hover:shadow-[0_0_30px_rgba(59,130,246,0.25)]"
+          className="hud-frame flex flex-col gap-6 rounded-2xl border border-white/10 border-l-4 border-l-blue-500 bg-white/5 p-8 backdrop-blur-md transition-colors duration-300 hover:border-l-blue-400 hover:shadow-[0_0_30px_rgba(59,130,246,0.25)] sm:flex-row sm:items-center sm:justify-between"
         >
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-blue-500/30 bg-blue-500/10">
-            <CapIcon />
+          <div className="flex items-start gap-5">
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-blue-500/30 bg-blue-500/10">
+              <CapIcon />
+            </div>
+
+            <div>
+              <h3 className="font-heading text-xl font-semibold tracking-tight text-white sm:text-2xl">
+                B.E. Computer Science Engineering
+              </h3>
+              <p className="mt-2 font-mono text-sm text-zinc-400">
+                Graduated March 2025
+              </p>
+            </div>
           </div>
 
-          <div>
-            <h3 className="font-heading text-lg font-semibold tracking-tight text-white">
-              B.E. Computer Science Engineering
-            </h3>
-            <p className="mt-2 font-mono text-sm text-zinc-400">
-              Graduated March 2025
-            </p>
-          </div>
+          {/* Splits the existing "Graduated March 2025" line into a labelled
+              readout so the card fills its width instead of trailing off. */}
+          <dl className="flex shrink-0 gap-10 border-t border-white/10 pt-5 sm:border-t-0 sm:border-l sm:pt-0 sm:pl-10">
+            <div>
+              <dt className="font-mono text-[10px] tracking-widest text-zinc-500 uppercase">
+                Status
+              </dt>
+              <dd className="mt-1.5 font-mono text-sm text-blue-300">
+                Graduated
+              </dd>
+            </div>
+            <div>
+              <dt className="font-mono text-[10px] tracking-widest text-zinc-500 uppercase">
+                Year
+              </dt>
+              <dd className="mt-1.5 font-mono text-sm text-blue-300">2025</dd>
+            </div>
+          </dl>
         </motion.div>
       </motion.div>
     </section>
