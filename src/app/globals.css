@@ -132,6 +132,43 @@ section[id] {
   animation: hud-blink 2.4s ease-in-out infinite;
 }
 
+/* Chrome-to-accent gradient with a highlight that sweeps across the glyphs,
+   plus a soft bloom. drop-shadow (not text-shadow) is used because the text
+   itself is transparent — the shadow has to be taken from the painted,
+   background-clipped result. */
+.text-shimmer {
+  background-image: linear-gradient(
+    100deg,
+    #ffffff 0%,
+    #cfe6ff 30%,
+    var(--color-blue-400) 46%,
+    #ffffff 58%,
+    #cfe6ff 78%,
+    #ffffff 100%
+  );
+  background-size: 260% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 22px rgba(62, 166, 255, 0.35));
+  animation: shimmer-sweep 7s linear infinite;
+}
+
+@keyframes shimmer-sweep {
+  0% {
+    background-position: 160% 0;
+  }
+  100% {
+    background-position: -60% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-shimmer {
+    animation: none;
+  }
+}
+
 @keyframes hud-blink {
   0%,
   100% {

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { getLenis } from "@/lib/lenis";
+import ScrambleText from "@/components/ScrambleText";
 
 const ROLES = ["Data Engineer", "BI Analyst", "GenAI Explorer"];
 const ROLE_INTERVAL_MS = 2600;
@@ -26,7 +27,7 @@ const item = {
   },
 };
 
-function CornerBrackets() {
+function CornerBrackets({ size = "h-3 w-3" }: { size?: string }) {
   const corners = [
     "top-0 left-0 border-t border-l",
     "top-0 right-0 border-t border-r",
@@ -42,7 +43,7 @@ function CornerBrackets() {
           aria-hidden
           animate={{ opacity: [0.35, 1, 0.35] }}
           transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-          className={`pointer-events-none absolute h-3 w-3 border-blue-400 ${pos}`}
+          className={`pointer-events-none absolute border-blue-400 ${size} ${pos}`}
         />
       ))}
     </>
@@ -128,18 +129,22 @@ export default function Hero() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.3 }}
-        className="relative z-10 flex flex-col items-center"
+        className="relative z-10 flex flex-col items-center px-8 py-10 sm:px-14 sm:py-12"
       >
+        {/* Frames the whole intro block, echoing the reticle motif used on the
+            cards and the orbit further down the page. */}
+        <CornerBrackets size="h-7 w-7" />
+
         <motion.span
           variants={item}
-          className="font-mono text-sm tracking-widest text-zinc-400 uppercase"
+          className="hud-eyebrow font-mono text-sm tracking-widest text-zinc-400 uppercase"
         >
-          Hi, I&apos;m
+          <ScrambleText text="Hi, I'm" />
         </motion.span>
 
         <motion.h2
           variants={item}
-          className="font-heading mt-2 text-4xl font-semibold tracking-tight text-white sm:text-5xl md:text-6xl"
+          className="font-heading text-shimmer mt-2 text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl"
         >
           Krishna Prasad H
         </motion.h2>
@@ -163,14 +168,14 @@ export default function Hero() {
           <a
             href="#projects"
             onClick={(e) => handleScrollTo(e, "#projects")}
-            className="rounded-full border border-blue-500/60 px-8 py-3 text-sm font-medium text-white shadow-[0_0_12px_rgba(59,130,246,0.5)] transition-shadow duration-300 hover:shadow-[0_0_24px_rgba(59,130,246,0.8)]"
+            className="rounded-full border border-blue-500/60 bg-blue-500/10 px-8 py-3 text-sm font-medium text-white shadow-[0_0_12px_rgba(59,130,246,0.5)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-500/20 hover:shadow-[0_0_28px_rgba(62,166,255,0.85)]"
           >
             View Projects
           </a>
           <a
             href="#contact"
             onClick={(e) => handleScrollTo(e, "#contact")}
-            className="rounded-full border border-white/15 px-8 py-3 text-sm font-medium text-zinc-200 transition-colors duration-300 hover:border-blue-500/50 hover:text-white"
+            className="rounded-full border border-white/15 px-8 py-3 text-sm font-medium text-zinc-200 transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-500/50 hover:text-white"
           >
             Get in Touch
           </a>
