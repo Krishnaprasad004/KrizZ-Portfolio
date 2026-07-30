@@ -221,20 +221,32 @@ export default function Navbar() {
               transition={{ duration: 0.25, ease: "easeOut" }}
               className="flex flex-col overflow-hidden px-6 lg:hidden"
             >
-              {NAV_LINKS.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => {
-                      setMobileOpen(false);
-                      handleNavClick(e, link.href);
-                    }}
-                    className="block border-t border-white/10 py-4 text-sm font-medium text-zinc-300 transition-colors duration-200 hover:text-white"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
+              {NAV_LINKS.map((link) => {
+                const isActive = activeId === link.href.slice(1);
+                return (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      onClick={(e) => {
+                        setMobileOpen(false);
+                        handleNavClick(e, link.href);
+                      }}
+                      aria-current={isActive ? "true" : undefined}
+                      className={`flex items-center gap-2 border-t border-white/10 py-4 text-sm font-medium transition-colors duration-200 hover:text-white ${
+                        isActive ? "text-white" : "text-zinc-300"
+                      }`}
+                    >
+                      {isActive && (
+                        <span
+                          aria-hidden
+                          className="h-1.5 w-1.5 rounded-full bg-blue-400 shadow-[0_0_8px_rgba(62,166,255,0.9)]"
+                        />
+                      )}
+                      {link.label}
+                    </a>
+                  </li>
+                );
+              })}
             </motion.ul>
           )}
         </AnimatePresence>

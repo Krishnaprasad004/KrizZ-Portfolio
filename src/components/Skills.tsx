@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "motion/react";
 import ConstellationMotif from "@/components/ConstellationMotif";
 import ScrambleText from "@/components/ScrambleText";
@@ -64,16 +65,40 @@ function DownArrowIcon() {
   );
 }
 
-function VerticalPipeline({ steps }: { steps: PipelineStep[] }) {
+function VerticalPipeline({
+  steps,
+  isActive,
+}: {
+  steps: PipelineStep[];
+  isActive: boolean;
+}) {
   return (
     <div className="mt-4 flex flex-col items-stretch">
       {steps.map((step, i) => (
         <div key={step.label} className="flex flex-col items-center">
-          {/* Staggered transition-delay makes the steps light up in sequence on
-              card hover, reading as data flowing down the pipeline. */}
+          {/* Staggered transition-delay makes the steps light up in sequence,
+              reading as data flowing down the pipeline. group-hover drives it
+              on desktop; isActive drives the same classes on tap, since a
+              touch device has no hover to trigger it. */}
           <div
             className="flex w-full items-center gap-2 rounded-lg border border-blue-500/30 bg-white/[0.02] px-3 py-1 transition-all duration-300 group-hover:border-blue-400/80 group-hover:bg-blue-500/10 group-hover:shadow-[0_0_14px_rgba(62,166,255,0.35)]"
-            style={{ transitionDelay: `${i * 110}ms` }}
+            style={{
+              transitionDelay: `${i * 110}ms`,
+              // Inline style rather than a competing Tailwind class: a plain
+              // class here would tie with the base border/bg classes on
+              // specificity and lose to whichever Tailwind happened to emit
+              // later in its stylesheet — unlike group-hover:, which wins
+              // reliably because .group:hover .foo outranks a single class.
+              // Inline style always wins, so tap-driven isActive is guaranteed
+              // to show regardless of that ordering.
+              ...(isActive
+                ? {
+                    borderColor: "rgba(62,166,255,0.8)",
+                    backgroundColor: "rgba(31,141,255,0.1)",
+                    boxShadow: "0 0 14px rgba(62,166,255,0.35)",
+                  }
+                : {}),
+            }}
           >
             <StepIcon />
             <div className="flex flex-col leading-tight">
@@ -83,7 +108,9 @@ function VerticalPipeline({ steps }: { steps: PipelineStep[] }) {
           </div>
           {i < steps.length - 1 && (
             <div
-              className="leading-none transition-opacity duration-300 group-hover:opacity-100"
+              className={`leading-none transition-opacity duration-300 group-hover:opacity-100 ${
+                isActive ? "opacity-100" : ""
+              }`}
               style={{ transitionDelay: `${i * 110 + 55}ms` }}
             >
               <DownArrowIcon />
@@ -270,6 +297,11 @@ const chip = {
 };
 
 export default function Skills() {
+  // Pipeline "lights up" on desktop hover, but a touch device has no hover —
+  // tapping a card toggles the same lit state so the effect is reachable on
+  // mobile too, not just decoration for mouse users.
+  const [activeCard, setActiveCard] = useState<number | null>(null);
+
   return (
     <section id="skills" className="section-pad relative z-10 w-full">
       <motion.div
@@ -287,38 +319,53 @@ export default function Skills() {
         </motion.div>
 
         <div className="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-3">
-          {PILLARS.map((pillar) => (
-            <motion.div key={pillar.title} variants={item} className="h-full">
-              <div className="hud-frame group flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.25)]">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full border border-blue-500/30 bg-blue-500/10">
-                  {pillar.icon}
-                </div>
+          {PILLARS.map((pillar, i) => {
+            const isActive = activeCard === i;
+            return (
+              <motion.div key={pillar.title} variants={item} className="h-full">
+                <div
+                  role="button"
+                  tabIndex={0}
+                  aria-pressed={isActive}
+                  onClick={() => setActiveCard((cur) => (cur === i ? null : i))}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActiveCard((cur) => (cur === i ? null : i));
+                    }
+                  }}
+                  className="hud-frame group flex h-full cursor-pointer flex-col rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.25)]"
+                >
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full border border-blue-500/30 bg-blue-500/10">
+                    {pillar.icon}
+                  </div>
 
-                <h3 className="font-heading mt-3 text-lg font-semibold tracking-tight text-white">
-                  {pillar.title}
-                </h3>
-                <p className="mt-1.5 text-sm text-zinc-400">{pillar.description}</p>
+                  <h3 className="font-heading mt-3 text-lg font-semibold tracking-tight text-white">
+                    {pillar.title}
+                  </h3>
+                  <p className="mt-1.5 text-sm text-zinc-400">{pillar.description}</p>
 
-                <VerticalPipeline steps={pillar.pipeline} />
+                  <VerticalPipeline steps={pillar.pipeline} isActive={isActive} />
 
-                <div className="mt-auto pt-3">
-                  <span className="font-mono text-[10px] tracking-widest text-zinc-500 uppercase">
-                    Stack
-                  </span>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {pillar.stack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="rounded-full border border-blue-500/30 px-2.5 py-1 font-mono text-[11px] text-zinc-300"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+                  <div className="mt-auto pt-3">
+                    <span className="font-mono text-[10px] tracking-widest text-zinc-500 uppercase">
+                      Stack
+                    </span>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {pillar.stack.map((tech) => (
+                        <span
+                          key={tech}
+                          className="rounded-full border border-blue-500/30 px-2.5 py-1 font-mono text-[11px] text-zinc-300"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
 
         <motion.div variants={item}>
