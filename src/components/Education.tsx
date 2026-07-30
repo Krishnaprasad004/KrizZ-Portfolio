@@ -7,9 +7,16 @@ import ScrambleText from "@/components/ScrambleText";
 
 const GPA = 7.8;
 
-/** Counts the GPA up from zero the first time the card scrolls into view. */
-function GpaCounter() {
-  const ref = useRef<HTMLSpanElement>(null);
+const GPA_SCALE = 10;
+
+/**
+ * GPA as a meter: a single ratio against a known limit, so the value is shown
+ * against its scale rather than as a bare number. The unfilled track is a
+ * lighter step of the same amber ramp as the fill, and both the count and the
+ * fill animate the first time the card scrolls into view.
+ */
+function GpaMeter() {
+  const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
   const [display, setDisplay] = useState(0);
 
@@ -24,9 +31,23 @@ function GpaCounter() {
   }, [inView]);
 
   return (
-    <span ref={ref} className="tabular-nums">
-      {display.toFixed(2)}
-    </span>
+    <div ref={ref} className="w-full sm:w-52">
+      <div className="flex items-baseline gap-1.5">
+        <span className="font-heading text-3xl font-semibold text-amber-400 tabular-nums">
+          {display.toFixed(2)}
+        </span>
+        <span className="font-mono text-xs text-zinc-500">/ {GPA_SCALE}</span>
+      </div>
+
+      <div className="mt-2.5 h-1.5 w-full overflow-hidden rounded-full bg-amber-400/15">
+        <motion.div
+          initial={{ width: 0 }}
+          animate={inView ? { width: `${(GPA / GPA_SCALE) * 100}%` } : undefined}
+          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+          className="h-full rounded-full bg-amber-400"
+        />
+      </div>
+    </div>
   );
 }
 
@@ -111,28 +132,29 @@ export default function Education() {
             </div>
           </div>
 
-          <dl className="flex shrink-0 items-start gap-8 border-t border-white/10 pt-5 sm:gap-10 sm:border-t-0 sm:border-l sm:pt-0 sm:pl-10">
-            <div>
-              <dt className="font-mono text-[10px] tracking-widest text-zinc-500 uppercase">
-                GPA
-              </dt>
-              <dd className="font-heading mt-1.5 text-2xl font-semibold text-amber-400">
-                <GpaCounter />
-              </dd>
-            </div>
-            <div>
-              <dt className="font-mono text-[10px] tracking-widest text-zinc-500 uppercase">
-                Status
-              </dt>
-              <dd className="mt-2.5 font-mono text-sm text-blue-300">
-                Graduated
-              </dd>
-            </div>
-            <div>
-              <dt className="font-mono text-[10px] tracking-widest text-zinc-500 uppercase">
-                Year
-              </dt>
-              <dd className="mt-2.5 font-mono text-sm text-blue-300">2025</dd>
+          <dl className="shrink-0 border-t border-white/10 pt-5 sm:border-t-0 sm:border-l sm:pt-0 sm:pl-10">
+            <dt className="font-mono text-[10px] tracking-widest text-zinc-500 uppercase">
+              GPA
+            </dt>
+            <dd className="mt-1.5">
+              <GpaMeter />
+            </dd>
+
+            <div className="mt-5 flex gap-10">
+              <div>
+                <dt className="font-mono text-[10px] tracking-widest text-zinc-500 uppercase">
+                  Status
+                </dt>
+                <dd className="mt-1.5 font-mono text-sm text-blue-300">
+                  Graduated
+                </dd>
+              </div>
+              <div>
+                <dt className="font-mono text-[10px] tracking-widest text-zinc-500 uppercase">
+                  Year
+                </dt>
+                <dd className="mt-1.5 font-mono text-sm text-blue-300">2025</dd>
+              </div>
             </div>
           </dl>
         </motion.div>
