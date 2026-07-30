@@ -92,7 +92,7 @@ function ExperienceItem({ exp }: { exp: ExperienceEntry }) {
               </>
             )}
             {exp.current && (
-              <span className="rounded-full border border-blue-500/40 px-2 py-0.5 font-mono text-xs text-blue-300">
+              <span className="rounded-full border border-amber-400/40 bg-amber-400/10 px-2 py-0.5 font-mono text-xs text-amber-300">
                 Current
               </span>
             )}

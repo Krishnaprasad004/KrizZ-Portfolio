@@ -131,7 +131,7 @@ function CountUpStat({
 
   return (
     <div className="flex flex-col items-center gap-1 sm:items-start">
-      <span className="font-heading text-3xl font-semibold text-white">
+      <span className="font-heading text-3xl font-semibold text-amber-400">
         {display}
       </span>
       <span className="font-mono text-[11px] tracking-widest text-zinc-400 uppercase">
