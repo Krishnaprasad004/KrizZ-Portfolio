@@ -58,13 +58,6 @@ export default function About() {
           <ConstellationMotif className="hidden sm:block" />
         </motion.div>
 
-        <motion.div variants={item}>
-          <h2 className="font-heading text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-            About Me
-          </h2>
-          <div className="mt-3 h-0.5 w-16 bg-gradient-to-r from-blue-500 to-transparent" />
-        </motion.div>
-
         <motion.p
           variants={item}
           className="max-w-3xl text-lg leading-relaxed text-zinc-300 sm:text-xl"
