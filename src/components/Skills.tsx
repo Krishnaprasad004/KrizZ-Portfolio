@@ -345,9 +345,11 @@ export default function Skills() {
                   </h3>
                   <p className="mt-1.5 text-sm text-zinc-400">{pillar.description}</p>
 
-                  <VerticalPipeline steps={pillar.pipeline} isActive={isActive} />
+                  <div className="flex flex-1 flex-col justify-center">
+                    <VerticalPipeline steps={pillar.pipeline} isActive={isActive} />
+                  </div>
 
-                  <div className="mt-auto pt-3">
+                  <div className="pt-3">
                     <span className="font-mono text-[10px] tracking-widest text-zinc-500 uppercase">
                       Stack
                     </span>

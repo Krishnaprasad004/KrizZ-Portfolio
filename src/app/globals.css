@@ -49,6 +49,35 @@ section[id] {
   @apply px-6 py-24 sm:py-32;
 }
 
+/* About section's card grid, as named areas rather than two independent
+   flex columns. Two unrelated flex columns can't see each other's content,
+   so matching row heights or bottom edges between them means guessing
+   pixel values by hand. A single grid with named areas lets the browser's
+   own auto-row sizing do that work: a row's height is the tallest cell
+   sharing it, and the Stack cell spans exactly the same two rows as
+   Specialty+Currently, so its bottom edge is *structurally* pinned to
+   theirs — not just visually close. */
+.about-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-areas:
+    "role"
+    "spec"
+    "curr"
+    "etc"
+    "stack";
+}
+
+@media (min-width: 1024px) {
+  .about-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    grid-template-areas:
+      "role etc"
+      "spec stack"
+      "curr stack";
+  }
+}
+
 /* ---------------------------------------------------------------------------
    Futuristic HUD accent layer.
 

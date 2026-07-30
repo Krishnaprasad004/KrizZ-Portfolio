@@ -5,11 +5,16 @@ import ConstellationMotif from "@/components/ConstellationMotif";
 import ScrambleText from "@/components/ScrambleText";
 
 const FACTS = [
-  { label: "Role", value: "Data Engineer Intern" },
-  { label: "Specialty", value: "Data Engineering & BI Analytics" },
+  { label: "Role", value: "Data Engineer Intern", area: "role" },
+  {
+    label: "Specialty",
+    value: "Data Engineering & BI Analytics",
+    area: "spec",
+  },
   {
     label: "Currently",
     value: "Data Engineer Intern @ Decision Minds, Pondicherry",
+    area: "curr",
   },
 ];
 
@@ -74,63 +79,66 @@ export default function About() {
           .
         </motion.p>
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)]">
-          <motion.div variants={item} className="flex flex-col justify-between gap-6">
-            {FACTS.map((fact) => (
-              <div
-                key={fact.label}
-                className="hud-frame rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50"
-              >
-                <span className="font-mono text-xs font-medium tracking-wide text-blue-400 uppercase">
-                  {fact.label}
-                </span>
-                <p className="mt-2 text-base text-zinc-100">{fact.value}</p>
-              </div>
-            ))}
-          </motion.div>
-
-          <motion.div variants={item} className="flex flex-col gap-6">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <div className="hud-frame rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50">
-                <h3 className="font-heading text-base font-semibold tracking-tight text-white">
-                  End-to-End Systems
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-zinc-400">
-                  ETL pipelines, dashboards, and GenAI applications that
-                  connect raw data to real systems.
-                </p>
-              </div>
-
-              <div className="hud-frame rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50">
-                <h3 className="font-heading text-base font-semibold tracking-tight text-white">
-                  Real-World Solutions
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-zinc-400">
-                  Turning raw data into systems people can actually act on.
-                </p>
-              </div>
-            </div>
-
-            <div className="hud-frame rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50">
+        <motion.div variants={item} className="about-grid">
+          {FACTS.map((fact) => (
+            <div
+              key={fact.label}
+              style={{ gridArea: fact.area }}
+              className="hud-frame flex flex-col justify-center rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50"
+            >
               <span className="font-mono text-xs font-medium tracking-wide text-blue-400 uppercase">
-                Stack
+                {fact.label}
               </span>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {STACK.map((tech) => (
-                  <span
-                    key={tech}
-                    className="rounded-full border border-blue-500/30 px-3 py-1 font-mono text-sm text-zinc-300"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-              <p className="mt-4 font-mono text-xs text-zinc-500">
-                Pondicherry, India
+              <p className="mt-2 text-base text-zinc-100">{fact.value}</p>
+            </div>
+          ))}
+
+          <div
+            style={{ gridArea: "etc" }}
+            className="grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2"
+          >
+            <div className="hud-frame flex flex-col justify-center rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50">
+              <h3 className="font-heading text-base font-semibold tracking-tight text-white">
+                End-to-End Systems
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+                ETL pipelines, dashboards, and GenAI applications that
+                connect raw data to real systems.
               </p>
             </div>
-          </motion.div>
-        </div>
+
+            <div className="hud-frame flex flex-col justify-center rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50">
+              <h3 className="font-heading text-base font-semibold tracking-tight text-white">
+                Real-World Solutions
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+                Turning raw data into systems people can actually act on.
+              </p>
+            </div>
+          </div>
+
+          <div
+            style={{ gridArea: "stack" }}
+            className="hud-frame flex flex-col justify-center rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50"
+          >
+            <span className="font-mono text-xs font-medium tracking-wide text-blue-400 uppercase">
+              Stack
+            </span>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {STACK.map((tech) => (
+                <span
+                  key={tech}
+                  className="rounded-full border border-blue-500/30 px-3 py-1 font-mono text-sm text-zinc-300"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+            <p className="mt-4 font-mono text-xs text-zinc-500">
+              Pondicherry, India
+            </p>
+          </div>
+        </motion.div>
       </motion.div>
     </section>
   );
