@@ -253,6 +253,22 @@ const item = {
   },
 };
 
+/** Core Technologies chips pop in one after another rather than all at once. */
+const chipContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.05 } },
+};
+
+const chip = {
+  hidden: { opacity: 0, y: 10, scale: 0.92 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] as const },
+  },
+};
+
 export default function Skills() {
   return (
     <section id="skills" className="section-pad relative z-10 w-full">
@@ -310,19 +326,24 @@ export default function Skills() {
             <ScrambleText text="Core Technologies" />
           </span>
 
-          <div className="mt-4 hidden flex-wrap items-center gap-x-2 gap-y-3 sm:flex">
-            {CORE_TECH.map((tech, i) => (
-              <div key={tech.name} className="flex items-center gap-2">
-                <span className="flex items-center gap-1.5 font-mono text-sm text-zinc-300">
-                  {tech.icon}
-                  {tech.name}
-                </span>
-                {i < CORE_TECH.length - 1 && (
-                  <span className="h-1 w-1 rounded-full bg-zinc-600" />
-                )}
-              </div>
+          <motion.div
+            variants={chipContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.4 }}
+            className="mt-5 hidden flex-wrap items-center gap-3 sm:flex"
+          >
+            {CORE_TECH.map((tech) => (
+              <motion.span
+                key={tech.name}
+                variants={chip}
+                className="group/chip flex items-center gap-2 rounded-full border border-blue-500/25 bg-white/5 px-4 py-2 font-mono text-sm text-zinc-300 backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-400/70 hover:bg-blue-500/10 hover:text-white hover:shadow-[0_0_18px_rgba(62,166,255,0.35)]"
+              >
+                {tech.icon}
+                {tech.name}
+              </motion.span>
             ))}
-          </div>
+          </motion.div>
 
           <div
             className="relative mt-4 w-full overflow-hidden sm:hidden"
