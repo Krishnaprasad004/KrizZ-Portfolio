@@ -153,7 +153,7 @@ export default function Certifications() {
           <ConstellationMotif className="hidden sm:block" />
         </motion.div>
 
-        <div className="grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {CERTIFICATIONS.map((cert) => (
             <motion.button
               key={`${cert.issuer}-${cert.name}`}
