@@ -65,10 +65,15 @@ function DownArrowIcon() {
 
 function VerticalPipeline({ steps }: { steps: PipelineStep[] }) {
   return (
-    <div className="mt-5 flex flex-col items-stretch">
+    <div className="mt-4 flex flex-col items-stretch">
       {steps.map((step, i) => (
         <div key={step.label} className="flex flex-col items-center">
-          <div className="flex w-full items-center gap-2 rounded-lg border border-blue-500/30 bg-white/[0.02] px-3 py-2">
+          {/* Staggered transition-delay makes the steps light up in sequence on
+              card hover, reading as data flowing down the pipeline. */}
+          <div
+            className="flex w-full items-center gap-2 rounded-lg border border-blue-500/30 bg-white/[0.02] px-3 py-1.5 transition-all duration-300 group-hover:border-blue-400/80 group-hover:bg-blue-500/10 group-hover:shadow-[0_0_14px_rgba(62,166,255,0.35)]"
+            style={{ transitionDelay: `${i * 110}ms` }}
+          >
             <StepIcon />
             <div className="flex flex-col leading-tight">
               <span className="font-mono text-xs text-zinc-200">{step.label}</span>
@@ -76,7 +81,10 @@ function VerticalPipeline({ steps }: { steps: PipelineStep[] }) {
             </div>
           </div>
           {i < steps.length - 1 && (
-            <div className="py-1">
+            <div
+              className="py-0.5 transition-opacity duration-300 group-hover:opacity-100"
+              style={{ transitionDelay: `${i * 110 + 55}ms` }}
+            >
               <DownArrowIcon />
             </div>
           )}
@@ -264,7 +272,7 @@ export default function Skills() {
         <div className="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-3">
           {PILLARS.map((pillar) => (
             <motion.div key={pillar.title} variants={item} className="h-full">
-              <div className="hud-frame flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.25)]">
+              <div className="hud-frame group flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.25)]">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full border border-blue-500/30 bg-blue-500/10">
                   {pillar.icon}
                 </div>
@@ -276,7 +284,7 @@ export default function Skills() {
 
                 <VerticalPipeline steps={pillar.pipeline} />
 
-                <div className="mt-auto pt-5">
+                <div className="mt-auto pt-4">
                   <span className="font-mono text-[10px] tracking-widest text-zinc-500 uppercase">
                     Stack
                   </span>
@@ -296,7 +304,7 @@ export default function Skills() {
           ))}
         </div>
 
-        <motion.div variants={item} className="mt-40">
+        <motion.div variants={item} className="mt-24">
           <span className="hud-eyebrow font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
             Core Technologies
           </span>

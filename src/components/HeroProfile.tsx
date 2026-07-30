@@ -73,7 +73,7 @@ interface OrbitItem {
 
 function OrbitBadge({ icon, children }: { icon: React.ReactNode; children: string }) {
   return (
-    <div className="relative flex h-[84px] w-[84px] flex-col items-center justify-center gap-1 rounded-full border border-blue-400/30 bg-white/5 p-2 text-center font-mono text-[9px] leading-tight text-blue-200 shadow-[0_0_14px_rgba(62,166,255,0.25)] backdrop-blur-md">
+    <div className="relative flex h-[76px] w-[76px] flex-col items-center justify-center gap-1 rounded-full border border-blue-400/30 bg-white/5 p-2 text-center font-mono text-[9px] leading-tight text-blue-200 shadow-[0_0_14px_rgba(62,166,255,0.25)] backdrop-blur-md">
       <span
         aria-hidden
         className="absolute top-2 right-2.5 h-1.5 w-1.5 animate-pulse rounded-full bg-blue-400 shadow-[0_0_6px_rgba(62,166,255,0.9)]"
@@ -289,22 +289,22 @@ export default function HeroProfile() {
 
   return (
     <section className="section-pad relative z-10 flex w-full items-center overflow-hidden">
-      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-16 lg:grid-cols-2">
+      <div className="mx-auto grid w-full max-w-5xl grid-cols-1 items-center gap-12 lg:grid-cols-2">
         <motion.div
           variants={container}
           initial="hidden"
           animate="show"
           className="relative z-10 flex items-center justify-center"
         >
-          <div className="relative flex h-[560px] w-[560px] max-w-full origin-center scale-[0.62] items-center justify-center sm:scale-100">
+          <div className="relative flex h-[460px] w-[460px] max-w-full origin-center scale-[0.72] items-center justify-center sm:scale-100">
             <HudCorners />
             <ScanSweep />
 
-            <RingPath radius={165} />
-            <RingPath radius={225} />
+            <RingPath radius={135} />
+            <RingPath radius={188} />
 
-            <OrbitRing radius={165} duration={20} items={INNER_RING_ITEMS} />
-            <OrbitRing radius={225} duration={30} reverse items={OUTER_RING_ITEMS} />
+            <OrbitRing radius={135} duration={20} items={INNER_RING_ITEMS} />
+            <OrbitRing radius={188} duration={30} reverse items={OUTER_RING_ITEMS} />
 
             <div className="relative z-10 flex h-[200px] w-[200px] items-center justify-center">
               <motion.div
