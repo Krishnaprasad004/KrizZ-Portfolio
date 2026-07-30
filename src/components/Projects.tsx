@@ -32,7 +32,7 @@ export default function Projects() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.2 }}
-        className="mx-auto flex max-w-6xl flex-col gap-10"
+        className="mx-auto flex max-w-5xl flex-col gap-10"
       >
         <motion.div variants={item} className="flex items-center gap-3">
           <span className="font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
