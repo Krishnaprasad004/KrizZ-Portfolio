@@ -321,7 +321,7 @@ export default function Skills() {
           ))}
         </div>
 
-        <motion.div variants={item}>
+        <motion.div variants={item} className="mt-16">
           <span className="hud-eyebrow font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
             <ScrambleText text="Core Technologies" />
           </span>
