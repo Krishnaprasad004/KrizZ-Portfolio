@@ -41,7 +41,7 @@ export default function CaseStudy({ project }: { project: Project }) {
   const toolsUsed = project.toolsUsed ?? project.tags;
 
   return (
-    <main className="w-full bg-[#0a0a0a]">
+    <main className="relative z-10 w-full bg-[#0a0a0a]">
       <div
         className="h-64 w-full bg-cover bg-center bg-no-repeat sm:h-80 lg:h-96"
         style={{ backgroundImage: project.coverImage }}
