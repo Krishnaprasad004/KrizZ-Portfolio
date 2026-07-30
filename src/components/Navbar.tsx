@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { getLenis, markProgrammaticScroll, isProgrammaticScroll } from "@/lib/lenis";
 import CommandPaletteTrigger from "@/components/CommandPaletteTrigger";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 const NAV_LINKS = [
   { label: "About", href: "#about" },
@@ -26,6 +27,7 @@ export default function Navbar() {
   const [activeId, setActiveId] = useState("");
   const lastScrollY = useRef(0);
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const reduced = usePrefersReducedMotion();
 
   // Scroll-spy: highlights whichever section currently owns the middle of the
   // viewport. The rootMargin band keeps exactly one section "active" at a time
@@ -100,6 +102,7 @@ export default function Navbar() {
   // (it would otherwise sit on top of and visually slice whatever passes
   // underneath it), and reveal it again on scroll-up or near the page top.
   useEffect(() => {
+    if (reduced) return;
     lastScrollY.current = window.scrollY;
     let ticking = false;
 
@@ -127,7 +130,7 @@ export default function Navbar() {
 
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [reduced]);
 
   return (
     <div

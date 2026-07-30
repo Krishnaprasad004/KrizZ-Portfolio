@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, animate, useInView } from "motion/react";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 const container = {
   hidden: {},
@@ -141,11 +142,13 @@ function OrbitRing({
   duration,
   reverse,
   items,
+  reduced,
 }: {
   radius: number;
   duration: number;
   reverse?: boolean;
   items: OrbitItem[];
+  reduced: boolean;
 }) {
   const angleStep = 360 / items.length;
 
@@ -154,11 +157,15 @@ function OrbitRing({
       className="absolute inset-0"
       style={{
         zIndex: 1,
-        animationName: "spin-cw",
-        animationDuration: `${duration}s`,
-        animationTimingFunction: "linear",
-        animationIterationCount: "infinite",
-        animationDirection: reverse ? "reverse" : "normal",
+        ...(reduced
+          ? {}
+          : {
+              animationName: "spin-cw",
+              animationDuration: `${duration}s`,
+              animationTimingFunction: "linear",
+              animationIterationCount: "infinite",
+              animationDirection: reverse ? "reverse" : "normal",
+            }),
       }}
     >
       {items.map((it, i) => {
@@ -177,12 +184,16 @@ function OrbitRing({
           >
             <div
               style={{
-                animationName: "spin-cw",
-                animationDuration: `${duration}s`,
-                animationTimingFunction: "linear",
-                animationIterationCount: "infinite",
-                animationDirection: reverse ? "normal" : "reverse",
                 opacity: 1,
+                ...(reduced
+                  ? {}
+                  : {
+                      animationName: "spin-cw",
+                      animationDuration: `${duration}s`,
+                      animationTimingFunction: "linear",
+                      animationIterationCount: "infinite",
+                      animationDirection: reverse ? "normal" : "reverse",
+                    }),
               }}
             >
               <OrbitBadge icon={it.icon}>{it.label}</OrbitBadge>
@@ -198,27 +209,29 @@ function CountUpStat({
   value,
   label,
   start,
+  reduced,
 }: {
   value: number;
   label: string;
   start: boolean;
+  reduced: boolean;
 }) {
   const [display, setDisplay] = useState(0);
 
   useEffect(() => {
-    if (!start) return;
+    if (!start || reduced) return;
     const controls = animate(0, value, {
       duration: 1.2,
       ease: [0.22, 1, 0.36, 1],
       onUpdate: (v) => setDisplay(Math.round(v)),
     });
     return () => controls.stop();
-  }, [start, value]);
+  }, [start, value, reduced]);
 
   return (
     <div className="flex flex-col items-center gap-1 sm:items-start">
       <span className="font-heading text-3xl font-semibold text-amber-400">
-        {display}
+        {start && reduced ? value : display}
       </span>
       <span className="font-mono text-[11px] tracking-widest text-zinc-400 uppercase">
         {label}
@@ -286,6 +299,7 @@ const OUTER_RING_ITEMS: OrbitItem[] = [
 export default function HeroProfile() {
   const statRowRef = useRef<HTMLDivElement>(null);
   const statsInView = useInView(statRowRef, { once: true, margin: "-40px" });
+  const reduced = usePrefersReducedMotion();
 
   return (
     <section className="section-pad relative z-10 flex w-full items-center overflow-hidden">
@@ -303,8 +317,8 @@ export default function HeroProfile() {
             <RingPath radius={135} />
             <RingPath radius={188} />
 
-            <OrbitRing radius={135} duration={20} items={INNER_RING_ITEMS} />
-            <OrbitRing radius={188} duration={30} reverse items={OUTER_RING_ITEMS} />
+            <OrbitRing radius={135} duration={20} items={INNER_RING_ITEMS} reduced={reduced} />
+            <OrbitRing radius={188} duration={30} reverse items={OUTER_RING_ITEMS} reduced={reduced} />
 
             <div className="relative z-10 flex h-[200px] w-[200px] items-center justify-center">
               <motion.div
@@ -352,12 +366,13 @@ export default function HeroProfile() {
             variants={item}
             className="flex gap-10"
           >
-            <CountUpStat value={5} label="Projects" start={statsInView} />
-            <CountUpStat value={2} label="Internships" start={statsInView} />
+            <CountUpStat value={5} label="Projects" start={statsInView} reduced={reduced} />
+            <CountUpStat value={2} label="Internships" start={statsInView} reduced={reduced} />
             <CountUpStat
               value={3}
               label="Certifications"
               start={statsInView}
+              reduced={reduced}
             />
           </motion.div>
 

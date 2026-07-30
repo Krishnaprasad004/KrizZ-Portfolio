@@ -1,14 +1,17 @@
 "use client";
 
 import { motion, useScroll, useSpring } from "motion/react";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 export default function ScrollProgressBar() {
   const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
+  const reduced = usePrefersReducedMotion();
+  const spring = useSpring(scrollYProgress, {
     stiffness: 300,
     damping: 40,
     restDelta: 0.001,
   });
+  const scaleX = reduced ? scrollYProgress : spring;
 
   return (
     <motion.div

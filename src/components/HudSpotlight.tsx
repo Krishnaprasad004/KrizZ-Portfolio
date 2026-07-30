@@ -12,6 +12,7 @@ import { useEffect } from "react";
 export default function HudSpotlight() {
   useEffect(() => {
     if (window.matchMedia("(pointer: coarse)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let ticking = false;
     let lastEvent: PointerEvent | null = null;
