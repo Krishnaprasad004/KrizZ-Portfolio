@@ -277,7 +277,7 @@ export default function Skills() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.2 }}
-        className="mx-auto flex max-w-5xl flex-col gap-10"
+        className="mx-auto flex max-w-5xl flex-col gap-[30px]"
       >
         <motion.div variants={item} className="flex items-center gap-3">
           <span className="hud-eyebrow font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
@@ -331,7 +331,7 @@ export default function Skills() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.4 }}
-            className="mt-10 hidden flex-wrap items-center gap-3 sm:flex"
+            className="mt-[30px] hidden flex-wrap items-center gap-3 sm:flex"
           >
             {CORE_TECH.map((tech) => (
               <motion.span
@@ -346,7 +346,7 @@ export default function Skills() {
           </motion.div>
 
           <div
-            className="relative mt-10 w-full overflow-hidden sm:hidden"
+            className="relative mt-[30px] w-full overflow-hidden sm:hidden"
             style={{
               WebkitMaskImage:
                 "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
