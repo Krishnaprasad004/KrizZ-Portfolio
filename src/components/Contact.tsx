@@ -84,9 +84,13 @@ export default function Contact() {
       id="contact"
       className="section-pad relative z-10 w-full overflow-hidden text-center"
     >
+      {/* Blurred rather than crisp: at 0.03 opacity but in focus, its letter
+          strokes were landing right behind the "Hire Me" button and reading
+          as overlapping text rather than background texture. The blur makes
+          it unambiguously a soft glow, whatever real content it sits behind. */}
       <span
         aria-hidden
-        className="font-heading pointer-events-none absolute top-1/2 left-1/2 z-0 -translate-x-1/2 -translate-y-1/2 text-[140px] leading-none font-bold text-white/[0.03] select-none sm:text-[220px] md:text-[280px]"
+        className="font-heading pointer-events-none absolute top-1/2 left-1/2 z-0 -translate-x-1/2 -translate-y-1/2 text-[140px] leading-none font-bold text-white/[0.05] blur-[6px] select-none sm:text-[220px] sm:blur-[8px] md:text-[280px] md:blur-[10px]"
       >
         HIRE
       </span>
