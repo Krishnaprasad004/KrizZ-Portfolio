@@ -34,7 +34,7 @@ const photoItem = {
 
 function OrbitBadge({ children }: { children: string }) {
   return (
-    <div className="flex h-[84px] w-[84px] items-center justify-center rounded-full border border-white/20 bg-white/5 p-2 text-center font-mono text-[9px] leading-tight text-sky-200 shadow-[0_0_14px_rgba(56,189,248,0.2)] backdrop-blur-md">
+    <div className="flex h-[84px] w-[84px] items-center justify-center rounded-full border border-white/20 bg-white/5 p-2 text-center font-mono text-[9px] leading-tight text-blue-200 shadow-[0_0_14px_rgba(62,166,255,0.2)] backdrop-blur-md">
       {children}
     </div>
   );

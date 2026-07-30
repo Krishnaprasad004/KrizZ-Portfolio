@@ -13,6 +13,16 @@
   --font-heading: var(--font-orbitron), sans-serif;
   --font-body: "Satoshi", sans-serif;
   --font-mono: var(--font-jetbrains-mono);
+
+  /* Single source of truth for the site's accent blue. Overriding the
+     Tailwind palette token here (rather than editing every text-blue-400 /
+     border-blue-500 / bg-blue-500 usage across ~15 files) means every one
+     of those utilities re-tunes together — a richer, cooler blue that reads
+     with more depth against the near-black background instead of Tailwind's
+     stock pastel blue-400. */
+  --color-blue-300: #7fc0ff;
+  --color-blue-400: #3ea6ff;
+  --color-blue-500: #1f8dff;
 }
 
 body {
