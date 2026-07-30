@@ -77,12 +77,7 @@ export default function About() {
           <span className="font-medium text-blue-400">
             computational social science
           </span>
-          . My work spans building ETL pipelines, dashboards, and exploring{" "}
-          <span className="font-medium text-blue-400">
-            GenAI applications
-          </span>{" "}
-          — I care about turning raw data into systems people can actually
-          act on.
+          .
         </motion.p>
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)]">
@@ -90,7 +85,7 @@ export default function About() {
             {FACTS.map((fact) => (
               <div
                 key={fact.label}
-                className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md"
+                className="hud-frame rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50"
               >
                 <span className="font-mono text-xs font-medium tracking-wide text-blue-400 uppercase">
                   {fact.label}
@@ -102,29 +97,27 @@ export default function About() {
 
           <motion.div variants={item} className="flex flex-col gap-6">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <div className="hud-frame rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50">
+              <div className="hud-frame rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50">
                 <h3 className="font-heading text-base font-semibold tracking-tight text-white">
                   End-to-End Systems
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-zinc-400">
-                  Building ETL pipelines, dashboards, and GenAI applications
-                  that connect raw data to real systems.
+                  ETL pipelines, dashboards, and GenAI applications that
+                  connect raw data to real systems.
                 </p>
               </div>
 
-              <div className="hud-frame rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50">
+              <div className="hud-frame rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50">
                 <h3 className="font-heading text-base font-semibold tracking-tight text-white">
                   Real-World Solutions
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-zinc-400">
-                  A Computer Science Engineering background with a focus on
-                  computational social science — turning raw data into
-                  systems people can actually act on.
+                  Turning raw data into systems people can actually act on.
                 </p>
               </div>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md">
+            <div className="hud-frame rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md transition-colors duration-300 hover:border-blue-500/50">
               <span className="font-mono text-xs font-medium tracking-wide text-blue-400 uppercase">
                 Stack
               </span>
