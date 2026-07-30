@@ -321,7 +321,7 @@ export default function Skills() {
           ))}
         </div>
 
-        <motion.div variants={item} className="mt-8">
+        <motion.div variants={item}>
           <span className="hud-eyebrow font-mono text-sm font-medium tracking-widest text-blue-400 uppercase">
             <ScrambleText text="Core Technologies" />
           </span>
@@ -331,7 +331,7 @@ export default function Skills() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.4 }}
-            className="mt-5 hidden flex-wrap items-center gap-3 sm:flex"
+            className="mt-10 hidden flex-wrap items-center gap-3 sm:flex"
           >
             {CORE_TECH.map((tech) => (
               <motion.span
@@ -346,7 +346,7 @@ export default function Skills() {
           </motion.div>
 
           <div
-            className="relative mt-4 w-full overflow-hidden sm:hidden"
+            className="relative mt-10 w-full overflow-hidden sm:hidden"
             style={{
               WebkitMaskImage:
                 "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
